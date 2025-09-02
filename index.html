@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CS2 JSON Viewer – Prohlížeč dem s filtry</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { color-scheme: dark; }
+    html, body { height: 100%; }
+    body { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background:#0f172a; color:#e2e8f0; }
+    .card { background:#111827; border:1px solid #334155; border-radius: 0.75rem; }
+    .chip { display:inline-flex; align-items:center; gap:.4rem; padding:.15rem .5rem; border-radius:9999px; font-size:.75rem; background:#0b1220; border:1px solid #1f2937; }
+    .chip-cta { cursor:pointer; user-select:none; }
+    .muted { color:#94a3b8; }
+    .badge { font-size:.7rem; background:#1f2937; border:1px solid #334155; padding:.1rem .4rem; border-radius:.4rem; }
+    details > summary { list-style:none; }
+    details > summary::-webkit-details-marker { display:none; }
+    .rotate-90 { transform: rotate(90deg); }
+    .player-dead { opacity:.55; }
+    .sticky-controls { position: sticky; top: 0; z-index: 30; backdrop-filter: blur(8px); background: rgba(2, 6, 23, .75); border-bottom:1px solid #1f2937; }
+    .hover-row:hover { background:#0b1220; }
+    .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; border:1px solid #334155; background:#0b1220; padding:0 .4rem; border-radius:.35rem; font-size:.75rem; }
+  </style>
+</head>
+<body class="min-h-full">
+  <header class="px-4 sm:px-6 md:px-10 py-6">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+      <div>
+        <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight">CS2 JSON Viewer</h1>
+        <p class="muted mt-1">Nahraj JSON se strukturou dem a procházej kola, snapshoty, týmy a hráče. Filtry, třídění, sbalování, export.</p>
+      </div>
+      <div class="text-sm muted flex flex-wrap items-center gap-2">
+        <span class="kbd">/</span> vyhledat
+        <span class="kbd">e</span> rozbalit vše
+        <span class="kbd">s</span> sbalit vše
+      </div>
+    </div>
+  </header>
+
+  <!-- OVLÁDACÍ PANEL -->
+  <section class="sticky-controls">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 py-3">
+      <div class="card p-4">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-3">
+          <!-- Levý blok: načtení -->
+          <div class="lg:col-span-5 flex flex-col sm:flex-row gap-3">
+            <label class="w-full sm:w-auto inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 cursor-pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16l4-5h-3V4h-2v7H8l4 5zm6-3v5H6v-5H4v5a2 2 0 002 2h12a2 2 0 002-2v-5h-2z"/></svg>
+              <input id="fileInput" type="file" accept=".json" class="hidden" />
+              <span id="fileLabel" class="text-sm">Nahrát JSON…</span>
+            </label>
+            <button id="loadSample" class="px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 hover:bg-slate-800">Načíst ukázková data</button>
+            <button id="exportFiltered" class="px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 hover:bg-slate-800">Export aktuálního výběru</button>
+          </div>
+
+          <!-- Prostřední blok: vyhledávání a filtry -->
+          <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
+            <div class="md:col-span-5 relative">
+              <input id="searchInput" type="text" placeholder="Hledat hráče…" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500" />
+              <button id="clearSearch" title="Vyčistit" class="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200 hidden">✕</button>
+            </div>
+            <div class="md:col-span-7 grid grid-cols-2 sm:grid-cols-4 gap-2">
+              <select id="roundSort" class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2">
+                <option value="asc">Kola: 1 → 30</option>
+                <option value="desc">Kola: 30 → 1</option>
+              </select>
+              <select id="teamFilter" class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2">
+                <option value="both">Tým: CT + T</option>
+                <option value="CT">Tým: pouze CT</option>
+                <option value="T">Tým: pouze T</option>
+              </select>
+              <select id="aliveFilter" class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2">
+                <option value="all">Stav: všichni</option>
+                <option value="alive">Stav: živí</option>
+                <option value="dead">Stav: mrtví</option>
+              </select>
+              <select id="playerSort" class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2">
+                <option value="name">Hráči: Jméno A→Z</option>
+                <option value="alive">Hráči: Živí první</option>
+                <option value="value">Hráči: Cena vybavení ↓</option>
+                <option value="utils">Hráči: Počet utilit ↓</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-3 flex flex-wrap gap-2 items-center">
+          <div class="inline-flex rounded-lg overflow-hidden border border-slate-700">
+            <button data-view="all" class="viewBtn px-3 py-1.5 bg-slate-800">Zobrazit vše</button>
+            <button data-view="teams" class="viewBtn px-3 py-1.5 hover:bg-slate-800">Jen týmové statistiky</button>
+            <button data-view="players" class="viewBtn px-3 py-1.5 hover:bg-slate-800">Jen hráče</button>
+          </div>
+          <div class="inline-flex rounded-lg overflow-hidden border border-slate-700">
+            <button id="expandAll" class="px-3 py-1.5 hover:bg-slate-800">Rozbalit vše</button>
+            <button id="collapseAll" class="px-3 py-1.5 hover:bg-slate-800">Sbalit vše</button>
+          </div>
+          <div class="inline-flex gap-2 items-center">
+            <label class="chip chip-cta"><input id="toggleTick" type="checkbox" class="accent-cyan-500 mr-1" checked> <span>Snapshot: 1. tick</span></label>
+            <label class="chip chip-cta"><input id="toggle20s" type="checkbox" class="accent-cyan-500 mr-1" checked> <span>Snapshot: 20 s</span></label>
+          </div>
+          <div class="ml-auto text-xs muted">Režim zobrazení a filtry se ukládají do <span class="kbd">localStorage</span>.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OBSAH -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 py-6">
+    <div id="content"></div>
+    <div id="emptyState" class="text-center mt-16 hidden">
+      <p class="muted">Zatím nic k zobrazení. Nahraj JSON nebo použij ukázková data.</p>
+    </div>
+  </main>
+
+  <template id="tmpl-demo">
+    <details class="demo details-open mb-4" open>
+      <summary class="flex items-center gap-2 cursor-pointer select-none">
+        <svg class="w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+        <h2 class="text-2xl font-bold"></h2>
+        <span class="badge ml-2" data-badge-total-rounds></span>
+      </summary>
+      <div class="mt-3 space-y-3" data-rounds></div>
+    </details>
+  </template>
+
+  <template id="tmpl-round">
+    <details class="round card p-4" open>
+      <summary class="flex items-center justify-between cursor-pointer select-none">
+        <div class="flex items-center gap-2">
+          <svg class="w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+          <h3 class="text-xl font-semibold">Kolo <span data-round-no></span></h3>
+          <span class="badge" data-badge-snapshots></span>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="chip"><span class="muted">Živí:</span> <span data-alive-ct>0</span> CT / <span data-alive-t>0</span> T</span>
+          <span class="chip"><span class="muted">AWP:</span> <span data-awp-ct>0</span> CT / <span data-awp-t>0</span> T</span>
+          <span class="chip"><span class="muted">$:</span> <span data-eqv-ct>0</span> / <span data-eqv-t>0</span></span>
+        </div>
+      </summary>
+      <div class="mt-3 grid grid-cols-1 gap-3" data-snapshots></div>
+    </details>
+  </template>
+
+  <template id="tmpl-snapshot">
+    <details class="snapshot card p-3" open>
+      <summary class="flex items-center gap-2 cursor-pointer select-none">
+        <svg class="w-4 h-4 transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+        <h4 class="text-lg font-semibold"></h4>
+        <span class="badge" data-badge-players></span>
+      </summary>
+      <div class="mt-3 grid grid-cols-1 lg:grid-cols-2 gap-3">
+        <div class="team" data-team="CT"></div>
+        <div class="team" data-team="T"></div>
+      </div>
+    </details>
+  </template>
+
+  <template id="tmpl-team">
+    <div class="team-card card p-3">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="font-bold" data-team-name></span>
+          <span class="badge" data-badge-team></span>
+        </div>
+        <div class="text-xs flex flex-wrap gap-2">
+          <span class="chip"><span class="muted">$</span> <span data-team-eqv>0</span></span>
+          <span class="chip"><span class="muted">Rifle</span> <span data-team-rifles>0</span></span>
+          <span class="chip"><span class="muted">AWP</span> <span data-team-awp>0</span></span>
+          <span class="chip"><span class="muted">SMG</span> <span data-team-smg>0</span></span>
+          <span class="chip"><span class="muted">Pistole</span> <span data-team-pistols>0</span></span>
+          <span class="chip"><span class="muted">Utility</span> <span data-team-utils>0</span></span>
+          <span class="chip" data-ct-only><span class="muted">Defuse</span> <span data-team-defuse>0</span></span>
+        </div>
+      </div>
+      <div class="mt-3" data-team-stats></div>
+      <div class="mt-3 border-t border-slate-800"></div>
+      <div class="mt-3" data-player-list></div>
+    </div>
+  </template>
+
+  <template id="tmpl-player">
+    <div class="player-row hover-row rounded-lg p-2 text-sm flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500" data-dot></span>
+        <span class="font-medium" data-name></span>
+        <span class="muted">|</span>
+        <span data-armor class="muted"></span>
+        <span data-primary class="muted"></span>
+        <span data-pistol class="muted"></span>
+        <span class="muted">|</span>
+        <span class="muted">U:</span>
+        <span data-utils class="muted"></span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="chip"><span class="muted">$</span> <span data-value>0</span></span>
+        <span class="chip" title="Smokes"><span>Sm</span> <span data-sm>0</span></span>
+        <span class="chip" title="HE"><span>HE</span> <span data-he>0</span></span>
+        <span class="chip" title="Molotov / Inc."><span>Mol</span> <span data-mol>0</span></span>
+        <span class="chip" title="Flash"><span>Fl</span> <span data-fl>0</span></span>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    // --- CENÍK pro výpočet hodnoty vybavení hráče (stejný princip jako v generátoru) ---
+    const PRICES = {
+      'Kevlar': 650, 'KevlarHelmet': 1000,
+      'AK-47': 2700, 'M4A1-S': 2900, 'M4A4': 3100, 'SG 553': 3000, 'Galil AR': 1800, 'FAMAS': 2050, 'AUG': 3300,
+      'AWP': 4750, 'SSG 08': 1700, 'SCAR-20': 5000, 'G3SG1': 5000,
+      'UMP-45': 1200, 'MP9': 1250, 'MAC-10': 1050, 'P90': 2350, 'MP7': 1500, 'MP5-SD': 1500, 'PP-Bizon': 1400,
+      'Nova': 1050, 'XM1014': 2000, 'MAG-7': 1300, 'Sawed-Off': 1100, 'M249': 5200, 'Negev': 1700,
+      'Glock-18': 200, 'USP-S': 200, 'P2000': 200,
+      'Dual Berettas': 300, 'P250': 300, 'Tec-9': 500, 'Five-SeveN': 500, 'CZ75-Auto': 500, 'Desert Eagle': 700, 'R8 Revolver': 600,
+      'smoke': 300, 'he': 300, 'molotov': 400, 'incendiary': 600, 'decoy': 50, 'flash': 200, 'hasDefuseKit': 400, 'hasZeus': 200
+    };
+
+    const SAMPLE = {
+      "Demo 1": {
+        "rounds": [
+          {
+            "1": {
+              "at_1_tick": {
+                "teams": {
+                  "CT": {
+                    "teamStats": {"equipmentValue": 5800, "rifleCount": 1, "pistolCount": 1, "utilityTotalCount": 5, "smokeCount": 1, "heGrenadeCount": 2, "molotovCount": 2},
+                    "players": [
+                      {"name": "Hráč A", "isAlive": true, "equipment": {"armor": "KevlarHelmet", "primaryWeapon": "M4A1-S", "pistol": "Glock-18", "smoke": 1, "he": 2, "molotov": 2}},
+                      {"name": "Hráč B", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč C", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč D", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč E", "isAlive": true, "equipment": {}}
+                    ]
+                  },
+                  "T": {"teamStats": {}, "players": [
+                      {"name": "Hráč F", "isAlive": false, "equipment": {}},
+                      {"name": "Hráč G", "isAlive": false, "equipment": {}},
+                      {"name": "Hráč H", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč I", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč J", "isAlive": true, "equipment": {}}
+                  ]}
+                }
+              },
+              "at_20_seconds": {
+                "teams": {
+                  "CT": {"teamStats": {}, "players": [
+                      {"name": "Hráč A", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč B", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč C", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč D", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč E", "isAlive": true, "equipment": {}}
+                  ]},
+                  "T": {"teamStats": {}, "players": [
+                      {"name": "Hráč F", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč G", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč H", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč I", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč J", "isAlive": true, "equipment": {}}
+                  ]}
+                }
+              }
+            }
+          },
+          {
+            "2": {
+              "at_1_tick": {
+                "teams": {
+                  "CT": {"teamStats": {}, "players": [
+                      {"name": "Hráč A", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč B", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč C", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč D", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč E", "isAlive": true, "equipment": {}}
+                  ]},
+                  "T": {"teamStats": {}, "players": [
+                      {"name": "Hráč F", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč G", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč H", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč I", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč J", "isAlive": true, "equipment": {}}
+                  ]}
+                }
+              },
+              "at_20_seconds": {
+                "teams": {
+                  "CT": {"teamStats": {}, "players": [
+                      {"name": "Hráč A", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč B", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč C", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč D", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč E", "isAlive": true, "equipment": {}}
+                  ]},
+                  "T": {"teamStats": {}, "players": [
+                      {"name": "Hráč F", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč G", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč H", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč I", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč J", "isAlive": true, "equipment": {}}
+                  ]}
+                }
+              }
+            }
+          }
+        ]
+      }
+    };
+
+    // --- Stav UI ---
+    const state = {
+      data: null,
+      view: localStorage.getItem('viewMode') || 'all',
+      filters: {
+        team: localStorage.getItem('teamFilter') || 'both',
+        alive: localStorage.getItem('aliveFilter') || 'all',
+        query: ''
+      },
+      sort: {
+        rounds: localStorage.getItem('roundSort') || 'asc',
+        players: localStorage.getItem('playerSort') || 'name'
+      },
+      snapshots: {
+        tick1: JSON.parse(localStorage.getItem('snap_tick1') ?? 'true'),
+        s20: JSON.parse(localStorage.getItem('snap_20s') ?? 'true')
+      }
+    };
+
+    // --- Pomocné funkce ---
+    const $ = sel => document.querySelector(sel);
+    const $$ = sel => Array.from(document.querySelectorAll(sel));
+
+    const fmt = n => (n ?? 0).toLocaleString('cs-CZ');
+
+    function computePlayerValue(p) {
+      if (!p?.isAlive) return 0; // počítáme jen živé (typicky)
+      const e = p.equipment || {};
+      let sum = 0;
+      if (e.armor) sum += PRICES[e.armor] || 0;
+      if (e.primaryWeapon) sum += PRICES[e.primaryWeapon] || 0;
+      if (e.pistol) sum += PRICES[e.pistol] || 0;
+      ['smoke','he','molotov','incendiary','decoy','flash'].forEach(k=>{ if (e[k]) sum += (PRICES[k]||0) * (e[k]||0) });
+      if (e.hasDefuseKit) sum += PRICES.hasDefuseKit;
+      if (e.hasZeus) sum += PRICES.hasZeus;
+      return sum;
+    }
+
+    function summarizeTeam(players, existingTeamStats = {}, teamKey = 'CT') {
+      // Z existujících teamStats + dopočítat z hráčů, když chybí
+      const s = { ...existingTeamStats };
+      const alive = players.filter(p=>p.isAlive);
+      // AWP, rifles, smg, pistols
+      const riflesSet = new Set(['AK-47','M4A4','M4A1-S','SG 553','AUG','Galil AR','FAMAS','AWP','SSG 08','SCAR-20','G3SG1']);
+      const smgSet = new Set(['UMP-45','MP9','MAC-10','P90','MP7','MP5-SD','PP-Bizon']);
+
+      let awp = 0, rifles=0, smg=0, pistols=0, utils=0, sm=0, he=0, mol=0, inc=0, fl=0, defuse=0, eqv=0;
+      alive.forEach(p=>{
+        const e = p.equipment||{};
+        if (e.primaryWeapon) {
+          if (e.primaryWeapon==='AWP') awp++;
+          if (riflesSet.has(e.primaryWeapon)) rifles++;
+          if (smgSet.has(e.primaryWeapon)) smg++;
+        }
+        if (e.pistol) pistols++;
+        sm += e.smoke||0; he += e.he||0; mol += e.molotov||0; inc += e.incendiary||0; fl += e.flash||0;
+        utils += (e.smoke||0)+(e.he||0)+(e.molotov||0)+(e.incendiary||0)+(e.decoy||0)+(e.flash||0);
+        if (e.hasDefuseKit) defuse++;
+        eqv += computePlayerValue(p);
+      });
+      // naplnit jen když chybí
+      s.awpCount = s.awpCount ?? awp;
+      s.rifleCount = s.rifleCount ?? rifles;
+      s.smgCount = s.smgCount ?? smg;
+      s.pistolCount = s.pistolCount ?? pistols;
+      s.utilityTotalCount = s.utilityTotalCount ?? utils;
+      s.smokeCount = s.smokeCount ?? sm;
+      s.heGrenadeCount = s.heGrenadeCount ?? he;
+      s.molotovCount = s.molotovCount ?? mol;
+      s.incendiaryCount = s.incendiaryCount ?? inc;
+      s.flashbangCount = s.flashbangCount ?? fl;
+      s.defuserCount = s.defuserCount ?? defuse;
+      s.equipmentValue = s.equipmentValue ?? eqv;
+      return s;
+    }
+
+    function filterPlayer(p) {
+      // tým filtr se uplatní na úrovni teamu, tady jen alive & query
+      if (state.filters.alive==='alive' && !p.isAlive) return false;
+      if (state.filters.alive==='dead' && p.isAlive) return false;
+      if (state.filters.query) {
+        return (p.name||'').toLowerCase().includes(state.filters.query);
+      }
+      return true;
+    }
+
+    function sortPlayers(players) {
+      const key = state.sort.players;
+      const q = state.filters.query;
+      // precompute
+      const enriched = players.map(p=>({ p, val: computePlayerValue(p), utils: ((p.equipment?.smoke||0)+(p.equipment?.he||0)+(p.equipment?.molotov||0)+(p.equipment?.incendiary||0)+(p.equipment?.decoy||0)+(p.equipment?.flash||0)) }));
+      enriched.sort((a,b)=>{
+        if (key==='name') return (a.p.name||'').localeCompare(b.p.name||'','cs');
+        if (key==='alive') return (b.p.isAlive===true)-(a.p.isAlive===true) || (a.p.name||'').localeCompare(b.p.name||'','cs');
+        if (key==='value') return b.val - a.val || (a.p.name||'').localeCompare(b.p.name||'','cs');
+        if (key==='utils') return b.utils - a.utils || (a.p.name||'').localeCompare(b.p.name||'','cs');
+        return 0;
+      });
+      // stabilně vrátit jen objekty hráčů
+      let out = enriched.map(e=>e.p);
+      if (q) { // boost: shoda prefixu jména nahoru
+        out.sort((a,b)=>{
+          const A=(a.name||'').toLowerCase();
+          const B=(b.name||'').toLowerCase();
+          const s=state.filters.query;
+          const ap = A.startsWith(s) ? -1 : 0;
+          const bp = B.startsWith(s) ? -1 : 0;
+          return ap - bp;
+        });
+      }
+      return out;
+    }
+
+    function setViewMode(view) {
+      state.view = view; localStorage.setItem('viewMode', view);
+      document.body.classList.remove('view-all','view-teams','view-players');
+      document.body.classList.add('view-'+(view==='all'?'all':view));
+      $$('.viewBtn').forEach(b=> b.classList.toggle('bg-slate-800', b.dataset.view===view));
+      // CSS řízení zobrazení
+      const styleId = 'view-style';
+      let style = document.getElementById(styleId);
+      if (!style) { style = document.createElement('style'); style.id = styleId; document.head.appendChild(style); }
+      style.textContent = `
+        body.view-teams [data-player-list]{ display:none; }
+        body.view-players [data-team-stats], body.view-players .team-card>div:first-child .text-xs { display:none; }
+      `;
+    }
+
+    function applyControlsPersistence() {
+      $('#roundSort').value = state.sort.rounds;
+      $('#playerSort').value = state.sort.players;
+      $('#teamFilter').value = state.filters.team;
+      $('#aliveFilter').value = state.filters.alive;
+      setViewMode(state.view);
+      $('#toggleTick').checked = state.snapshots.tick1;
+      $('#toggle20s').checked = state.snapshots.s20;
+    }
+
+    // --- Render ---
+    const content = document.getElementById('content');
+    const emptyState = document.getElementById('emptyState');
+
+    function clearContent() { content.innerHTML = ''; }
+
+    function renderData(data) {
+      clearContent();
+      if (!data || Object.keys(data).length===0) { emptyState.classList.remove('hidden'); return; }
+      emptyState.classList.add('hidden');
+
+      const tDemo = document.getElementById('tmpl-demo');
+      const tRound = document.getElementById('tmpl-round');
+      const tSnap = document.getElementById('tmpl-snapshot');
+      const tTeam = document.getElementById('tmpl-team');
+      const tPlayer = document.getElementById('tmpl-player');
+
+      for (const [demoName, demoObj] of Object.entries(data)) {
+        const dNode = tDemo.content.cloneNode(true);
+        dNode.querySelector('h2').textContent = demoName;
+        const roundsWrap = dNode.querySelector('[data-rounds]');
+
+        const roundsArr = Array.isArray(demoObj.rounds) ? demoObj.rounds : [];
+        let rounds = roundsArr.map(o=>{ const k=Object.keys(o)[0]; return { no: +k, data: o[k] }; });
+        rounds.sort((a,b)=> state.sort.rounds==='asc' ? (a.no-b.no) : (b.no-a.no));
+
+        rounds.forEach(round => {
+          const rNode = tRound.content.cloneNode(true);
+          rNode.querySelector('[data-round-no]').textContent = round.no;
+          const snapsWrap = rNode.querySelector('[data-snapshots]');
+
+          // agregace pro badge v hlavičce kola
+          let aliveCT=0, aliveT=0, awpCT=0, awpT=0, eqvCT=0, eqvT=0, playersTotal=0;
+
+          const snapsEntries = Object.entries(round.data || {});
+          const filteredSnaps = snapsEntries.filter(([snapKey]) => {
+            if (snapKey==='at_1_tick' && !state.snapshots.tick1) return false;
+            if (snapKey==='at_20_seconds' && !state.snapshots.s20) return false;
+            return true;
+          });
+
+          filteredSnaps.forEach(([snapKey, snapVal])=>{
+            const sNode = tSnap.content.cloneNode(true);
+            sNode.querySelector('h4').textContent = snapKey.replace('at_1_tick','V 1. ticku').replace('at_20_seconds','Po 20 s');
+            const teams = snapVal?.teams || {};
+
+            // Render CT & T
+            ['CT','T'].forEach(teamKey => {
+              if (state.filters.team!=='both' && state.filters.team!==teamKey) return; // přeskočit tým
+              const teamWrap = sNode.querySelector(`.team[data-team="${teamKey}"]`);
+              if (!teamWrap) return;
+
+              const tn = tTeam.content.cloneNode(true);
+              tn.querySelector('[data-team-name]').textContent = teamKey;
+              if (teamKey!=="CT") tn.querySelector('[data-ct-only]').style.display='none';
+
+              const teamObj = teams[teamKey] || { teamStats:{}, players: [] };
+              const players = Array.isArray(teamObj.players) ? teamObj.players : [];
+
+              // Filtrace hráčů
+              const filteredPlayers = players.filter(filterPlayer);
+              const sortedPlayers = sortPlayers(filteredPlayers);
+
+              // Team stats (dopočet)
+              const stats = summarizeTeam(players, teamObj.teamStats, teamKey);
+
+              // Badge
+              tn.querySelector('[data-badge-team]').textContent = `${filteredPlayers.filter(p=>p.isAlive).length}/${filteredPlayers.length} živých`;
+
+              // Stat chips
+              tn.querySelector('[data-team-eqv]').textContent = fmt(stats.equipmentValue||0);
+              tn.querySelector('[data-team-rifles]').textContent = fmt(stats.rifleCount||0);
+              tn.querySelector('[data-team-awp]').textContent = fmt(stats.awpCount||0);
+              tn.querySelector('[data-team-smg]').textContent = fmt(stats.smgCount||0);
+              tn.querySelector('[data-team-pistols]').textContent = fmt(stats.pistolCount||0);
+              tn.querySelector('[data-team-utils]').textContent = fmt(stats.utilityTotalCount||0);
+              tn.querySelector('[data-team-defuse]').textContent = fmt(stats.defuserCount||0);
+
+              // Accumulators for round header (bereme první dostupný snapshot)
+              const aliveCount = players.filter(p=>p.isAlive).length;
+              if (teamKey==='CT') { aliveCT += aliveCount; awpCT += (stats.awpCount||0); eqvCT += (stats.equipmentValue||0); }
+              else { aliveT += aliveCount; awpT += (stats.awpCount||0); eqvT += (stats.equipmentValue||0); }
+              playersTotal += players.length;
+
+              // Team stats tabulka (klíč:hodnota)
+              const ts = teamObj.teamStats||{};
+              const tsWrap = tn.querySelector('[data-team-stats]');
+              const entries = Object.entries(stats);
+              if (entries.length===0) {
+                tsWrap.innerHTML = '<div class="muted text-sm">Žádné týmové statistiky.</div>';
+              } else {
+                const grid = document.createElement('div');
+                grid.className = 'grid grid-cols-2 md:grid-cols-3 gap-2 text-sm';
+                const labels = {
+                  equipmentValue: 'Hodnota vybavení', awpCount:'AWP', rifleCount:'Pušky', smgCount:'SMG', pistolCount:'Pistole',
+                  utilityTotalCount:'Utility celkem', smokeCount:'Smoky', heGrenadeCount:'HE', molotovCount:'Molotovy', incendiaryCount:'Incendiary', flashbangCount:'Flashbangy', defuserCount:'Defuse kity'
+                };
+                for (const [k,v] of Object.entries(labels)) {
+                  if (stats[k]==null) continue;
+                  const div = document.createElement('div');
+                  div.className = 'flex items-center justify-between bg-slate-900/60 border border-slate-800 rounded px-2 py-1';
+                  div.innerHTML = `<span class="muted">${v}</span><span>${fmt(stats[k])}</span>`;
+                  grid.appendChild(div);
+                }
+                tsWrap.appendChild(grid);
+              }
+
+              // Player list
+              const plist = tn.querySelector('[data-player-list]');
+              if (sortedPlayers.length===0) {
+                plist.innerHTML = '<div class="muted text-sm">Žádní hráči neodpovídají filtrům.</div>';
+              } else {
+                sortedPlayers.forEach(p=>{
+                  const pn = tPlayer.content.cloneNode(true);
+                  if (!p.isAlive) {
+                    pn.querySelector('[data-dot]').classList.remove('bg-emerald-500');
+                    pn.querySelector('[data-dot]').classList.add('bg-rose-500');
+                    pn.querySelector('.player-row').classList.add('player-dead');
+                  }
+                  pn.querySelector('[data-name]').textContent = p.name || 'Neznámý';
+                  const e = p.equipment||{};
+                  pn.querySelector('[data-armor]').textContent = e.armor? e.armor : '';
+                  pn.querySelector('[data-primary]').textContent = e.primaryWeapon? `· ${e.primaryWeapon}` : '';
+                  pn.querySelector('[data-pistol]').textContent = e.pistol? `· ${e.pistol}` : '';
+                  const utilsText = ['smoke','he','molotov','incendiary','decoy','flash']
+                    .map(k=> e[k]? `${k[0].toUpperCase()+k.slice(1,2)}:${e[k]}`:null).filter(Boolean).join(' ');
+                  pn.querySelector('[data-utils]').textContent = utilsText || '—';
+                  pn.querySelector('[data-value]').textContent = fmt(computePlayerValue(p));
+                  pn.querySelector('[data-sm]').textContent = fmt(e.smoke||0);
+                  pn.querySelector('[data-he]').textContent = fmt(e.he||0);
+                  pn.querySelector('[data-mol]').textContent = fmt((e.molotov||0)+(e.incendiary||0));
+                  pn.querySelector('[data-fl]').textContent = fmt(e.flash||0);
+                  plist.appendChild(pn);
+                });
+              }
+
+              teamWrap.replaceWith(tn);
+            });
+
+            // Badge počtu hráčů v snapshotu (po filtrech)
+            const playersInSnap = ['CT','T'].flatMap(teamKey=>{
+              if (state.filters.team!=='both' && state.filters.team!==teamKey) return [];
+              const teamObj = teams[teamKey]||{players:[]};
+              return teamObj.players ? teamObj.players.filter(filterPlayer) : [];
+            });
+            sNode.querySelector('[data-badge-players]').textContent = `${playersInSnap.length} hráčů`;
+
+            snapsWrap.appendChild(sNode);
+          });
+
+          // update header badges pro kolo
+          rNode.querySelector('[data-alive-ct]').textContent = fmt(aliveCT);
+          rNode.querySelector('[data-alive-t]').textContent = fmt(aliveT);
+          rNode.querySelector('[data-awp-ct]').textContent = fmt(awpCT);
+          rNode.querySelector('[data-awp-t]').textContent = fmt(awpT);
+          rNode.querySelector('[data-eqv-ct]').textContent = fmt(eqvCT);
+          rNode.querySelector('[data-eqv-t]').textContent = fmt(eqvT);
+          rNode.querySelector('[data-badge-snapshots]').textContent = `${filteredSnaps.length} snapshoty`;
+
+          roundsWrap.appendChild(rNode);
+        });
+
+        // badge počtu kol
+        dNode.querySelector('[data-badge-total-rounds]').textContent = `${rounds.length} kol`;
+        content.appendChild(dNode);
+      }
+
+      // šipky v <summary>
+      $$('details > summary svg').forEach(svg=>{
+        const details = svg.closest('details');
+        const sync = ()=> svg.classList.toggle('rotate-90', details.open);
+        sync();
+        details.addEventListener('toggle', sync);
+      });
+    }
+
+    // --- Načítání dat ---
+    const fileInput = document.getElementById('fileInput');
+    const fileLabel = document.getElementById('fileLabel');
+
+    fileInput.addEventListener('change', (e)=>{
+      const file = e.target.files?.[0];
+      if (!file) return;
+      fileLabel.textContent = `Načteno: ${file.name}`;
+      const reader = new FileReader();
+      reader.onload = (ev)=>{
+        try {
+          const json = JSON.parse(ev.target.result);
+          state.data = json; renderData(state.data);
+        } catch(err) {
+          alert('Chyba při čtení JSON: '+err.message);
+        }
+      };
+      reader.readAsText(file);
+    });
+
+    document.getElementById('loadSample').addEventListener('click', ()=>{
+      state.data = SAMPLE; fileLabel.textContent = 'Načtena ukázka'; renderData(state.data);
+    });
+
+    // --- Ovládací prvky ---
+    document.getElementById('roundSort').addEventListener('change', (e)=>{
+      state.sort.rounds = e.target.value; localStorage.setItem('roundSort', state.sort.rounds); if (state.data) renderData(state.data);
+    });
+    document.getElementById('playerSort').addEventListener('change', (e)=>{
+      state.sort.players = e.target.value; localStorage.setItem('playerSort', state.sort.players); if (state.data) renderData(state.data);
+    });
+    document.getElementById('teamFilter').addEventListener('change', (e)=>{
+      state.filters.team = e.target.value; localStorage.setItem('teamFilter', state.filters.team); if (state.data) renderData(state.data);
+    });
+    document.getElementById('aliveFilter').addEventListener('change', (e)=>{
+      state.filters.alive = e.target.value; localStorage.setItem('aliveFilter', state.filters.alive); if (state.data) renderData(state.data);
+    });
+
+    $$('.viewBtn').forEach(btn=> btn.addEventListener('click', ()=>{ setViewMode(btn.dataset.view); if (state.data) renderData(state.data); }));
+
+    // Snapshot toggles
+    document.getElementById('toggleTick').addEventListener('change', (e)=>{
+      state.snapshots.tick1 = e.target.checked; localStorage.setItem('snap_tick1', state.snapshots.tick1); if (state.data) renderData(state.data);
+    });
+    document.getElementById('toggle20s').addEventListener('change', (e)=>{
+      state.snapshots.s20 = e.target.checked; localStorage.setItem('snap_20s', state.snapshots.s20); if (state.data) renderData(state.data);
+    });
+
+    // Hledání
+    const searchInput = document.getElementById('searchInput');
+    const clearSearch = document.getElementById('clearSearch');
+    searchInput.addEventListener('input', (e)=>{
+      state.filters.query = (e.target.value||'').trim().toLowerCase();
+      clearSearch.classList.toggle('hidden', !state.filters.query);
+      if (state.data) renderData(state.data);
+    });
+    clearSearch.addEventListener('click', ()=>{ searchInput.value=''; searchInput.dispatchEvent(new Event('input')) });
+
+    // Rozbalit/sbalit vše
+    document.getElementById('expandAll').addEventListener('click', ()=>{
+      $$('details').forEach(d=> d.open = true);
+    });
+    document.getElementById('collapseAll').addEventListener('click', ()=>{
+      $$('details').forEach(d=> d.open = false);
+    });
+
+    // Export aktuálního výběru
+    document.getElementById('exportFiltered').addEventListener('click', ()=>{
+      if (!state.data) return alert('Nejprve načti data.');
+      const filtered = exportCurrentView(state.data);
+      const blob = new Blob([JSON.stringify(filtered, null, 2)], {type: 'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'cs2_view_filtered.json'; a.click();
+      setTimeout(()=> URL.revokeObjectURL(url), 5000);
+    });
+
+    function exportCurrentView(data) {
+      // Exportuje jen to, co odpovídá aktuálním filtrům/třídění (bez vizuálního režimu)
+      const out = {};
+      for (const [demoName, demoObj] of Object.entries(data)) {
+        const roundsArr = Array.isArray(demoObj.rounds) ? demoObj.rounds : [];
+        let rounds = roundsArr.map(o=>{ const k=Object.keys(o)[0]; return { no: +k, data: o[k] }; });
+        rounds.sort((a,b)=> state.sort.rounds==='asc' ? (a.no-b.no) : (b.no-a.no));
+        const outRounds = rounds.map(r=>{
+          const obj = {};
+          const snaps = Object.entries(r.data).filter(([snapKey])=>{
+            if (snapKey==='at_1_tick' && !state.snapshots.tick1) return false;
+            if (snapKey==='at_20_seconds' && !state.snapshots.s20) return false;
+            return true;
+          }).map(([snapKey, snapVal])=>{
+            const teams = {};
+            ['CT','T'].forEach(teamKey=>{
+              if (state.filters.team!=='both' && state.filters.team!==teamKey) return;
+              const t = snapVal.teams?.[teamKey]; if (!t) return;
+              const players = (t.players||[]).filter(filterPlayer);
+              const teamStats = summarizeTeam(t.players||[], t.teamStats||{}, teamKey);
+              teams[teamKey] = { teamStats, players };
+            });
+            return [snapKey, { teams }];
+          });
+          obj[r.no] = Object.fromEntries(snaps);
+          return obj;
+        });
+        out[demoName] = { rounds: outRounds };
+      }
+      return out;
+    }
+
+    // Klávesové zkratky
+    window.addEventListener('keydown', (e)=>{
+      if (e.target.matches('input,textarea')) return;
+      if (e.key === '/') { e.preventDefault(); $('#searchInput').focus(); }
+      if (e.key.toLowerCase() === 'e') { e.preventDefault(); $('#expandAll').click(); }
+      if (e.key.toLowerCase() === 's') { e.preventDefault(); $('#collapseAll').click(); }
+    });
+
+    // Inicializace
+    applyControlsPersistence();
+    // Zobraz prázdný stav
+    emptyState.classList.remove('hidden');
+  </script>
+</body>
+</html>
