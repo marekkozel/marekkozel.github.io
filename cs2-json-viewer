@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>CS2 JSON Viewer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background: #1a202c; color: #e2e8f0; font-family: sans-serif; }
+    .card { background: #2d3748; border-radius: 0.75rem; padding: 1rem; margin-bottom: 1rem; }
+    .collapsible { cursor: pointer; user-select: none; }
+    .content { display: none; margin-left: 1rem; border-left: 2px solid #4a5568; padding-left: 1rem; }
+    .player-dead { opacity: 0.5; }
+  </style>
+</head>
+<body class="p-6">
+
+  <header class="mb-6 text-center">
+    <h1 class="text-3xl font-bold">CS2 JSON Viewer</h1>
+  </header>
+
+  <!-- Upload -->
+  <div class="card">
+    <input type="file" id="fileInput" accept=".json" class="mb-4 block w-full text-sm text-gray-300">
+    <div class="flex flex-wrap gap-2 mb-4">
+      <select id="viewMode" class="bg-gray-700 p-2 rounded">
+        <option value="all">Vše</option>
+        <option value="teams">Týmy</option>
+        <option value="players">Hráči</option>
+      </select>
+      <select id="teamFilter" class="bg-gray-700 p-2 rounded">
+        <option value="all">Všechny týmy</option>
+        <option value="CT">CT</option>
+        <option value="T">T</option>
+      </select>
+      <select id="aliveFilter" class="bg-gray-700 p-2 rounded">
+        <option value="all">Všichni hráči</option>
+        <option value="alive">Živí</option>
+        <option value="dead">Mrtví</option>
+      </select>
+      <input type="text" id="searchPlayer" placeholder="Vyhledat hráče" class="bg-gray-700 p-2 rounded">
+    </div>
+    <div id="output"></div>
+  </div>
+
+  <script>
+    const fileInput = document.getElementById('fileInput');
+    const output = document.getElementById('output');
+    const viewMode = document.getElementById('viewMode');
+    const teamFilter = document.getElementById('teamFilter');
+    const aliveFilter = document.getElementById('aliveFilter');
+    const searchPlayer = document.getElementById('searchPlayer');
+
+    const filters = { viewMode: 'all', team: 'all', alive: 'all', search: '' };
+
+    // Load saved filters
+    const saved = localStorage.getItem('cs2viewer_filters');
+    if (saved) {
+      Object.assign(filters, JSON.parse(saved));
+      viewMode.value = filters.viewMode;
+      teamFilter.value = filters.team;
+      aliveFilter.value = filters.alive;
+      searchPlayer.value = filters.search;
+    }
+
+    function saveFilters() {
+      localStorage.setItem('cs2viewer_filters', JSON.stringify(filters));
+    }
+
+    [viewMode, teamFilter, aliveFilter, searchPlayer].forEach(el => {
+      el.addEventListener('input', () => {
+        filters.viewMode = viewMode.value;
+        filters.team = teamFilter.value;
+        filters.alive = aliveFilter.value;
+        filters.search = searchPlayer.value.toLowerCase();
+        saveFilters();
+        if (window.currentJson) renderAll(window.currentJson);
+      });
+    });
+
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          const json = JSON.parse(event.target.result);
+          window.currentJson = json;
+          output.innerHTML = "";
+          renderAll(json);
+          addCollapsibleBehavior();
+        } catch (err) {
+          output.innerHTML = `<p class="text-red-400">Chyba při čtení JSON: ${err.message}</p>`;
+        }
+      };
+      reader.readAsText(file);
+    });
+
+    function renderAll(data) {
+      output.innerHTML = '';
+      if (filters.viewMode === 'teams') {
+        renderTeams(data, output);
+      } else if (filters.viewMode === 'players') {
+        renderPlayers(data, output);
+      } else {
+        renderJson(data, output);
+      }
+    }
+
+    function renderTeams(data, container) {
+      if (!data.teams) return;
+      Object.entries(data.teams).forEach(([teamName, teamData]) => {
+        if (filters.team !== 'all' && teamName !== filters.team) return;
+        const block = document.createElement('div');
+        block.className = 'card';
+        const aliveCount = Object.values(teamData.players || {}).filter(p => p.isAlive).length;
+        const deadCount = Object.values(teamData.players || {}).filter(p => !p.isAlive).length;
+        block.innerHTML = `<h2 class="font-bold text-lg">${teamName}</h2>
+                           <p>Živí: ${aliveCount} | Mrtví: ${deadCount}</p>`;
+        container.appendChild(block);
+      });
+    }
+
+    function renderPlayers(data, container) {
+      if (!data.teams) return;
+      Object.entries(data.teams).forEach(([teamName, teamData]) => {
+        Object.values(teamData.players || {}).forEach(player => {
+          if (filters.team !== 'all' && teamName !== filters.team) return;
+          if (filters.alive === 'alive' && !player.isAlive) return;
+          if (filters.alive === 'dead' && player.isAlive) return;
+          if (filters.search && !player.name.toLowerCase().includes(filters.search)) return;
+          const block = document.createElement('div');
+          block.className = 'card' + (player.isAlive ? '' : ' player-dead');
+          block.innerHTML = `<h2 class="font-bold">${player.name}</h2>
+                             <p>Tým: ${teamName}</p>
+                             <p>HP: ${player.health}</p>
+                             <p>Zbraně: ${JSON.stringify(player.weapons)}</p>`;
+          container.appendChild(block);
+        });
+      });
+    }
+
+    function renderJson(data, container) {
+      Object.entries(data).forEach(([key, value]) => {
+        const block = document.createElement("div");
+        block.className = "mb-2";
+
+        if (typeof value === "object" && value !== null) {
+          block.innerHTML = `<div class="collapsible font-semibold text-cyan-400">▶ ${key}</div>`;
+          const content = document.createElement("div");
+          content.className = "content";
+          renderJson(value, content);
+          block.appendChild(content);
+        } else {
+          block.innerHTML = `<div><span class="text-gray-400">${key}:</span> ${value}</div>`;
+        }
+        container.appendChild(block);
+      });
+    }
+
+    function addCollapsibleBehavior() {
+      document.querySelectorAll(".collapsible").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const content = btn.nextElementSibling;
+          const isOpen = content.style.display === "block";
+          content.style.display = isOpen ? "none" : "block";
+          btn.textContent = (isOpen ? "▶" : "▼") + " " + btn.textContent.slice(2);
+        });
+      });
+    }
+  </script>
+
+</body>
+</html>
