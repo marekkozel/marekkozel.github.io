@@ -182,6 +182,25 @@
   </template>
 
   <script>
+  const fileInput = document.getElementById('fileInput');
+    const output = document.getElementById('output');
+    const viewMode = document.getElementById('viewMode');
+    const teamFilter = document.getElementById('teamFilter');
+    const aliveFilter = document.getElementById('aliveFilter');
+    const searchPlayer = document.getElementById('searchPlayer');
+
+    const filters = { viewMode: 'all', team: 'all', alive: 'all', search: '' };
+
+    // Load saved filters
+    const saved = localStorage.getItem('cs2viewer_filters');
+    if (saved) {
+      Object.assign(filters, JSON.parse(saved));
+      viewMode.value = filters.viewMode;
+      teamFilter.value = filters.team;
+      aliveFilter.value = filters.alive;
+      searchPlayer.value = filters.search;
+    }
+    // --- CENÍK pro výpočet hodnoty vybavení hráče (stejný princip jako v generátoru) ---
     const PRICES = {
       'Kevlar': 650, 'KevlarHelmet': 1000,
       'AK-47': 2700, 'M4A1-S': 2900, 'M4A4': 3100, 'SG 553': 3000, 'Galil AR': 1800, 'FAMAS': 2050, 'AUG': 3300,
@@ -193,7 +212,109 @@
       'smoke': 300, 'he': 300, 'molotov': 400, 'incendiary': 600, 'decoy': 50, 'flash': 200, 'hasDefuseKit': 400, 'hasZeus': 200
     };
 
+    function saveFilters() {
+      localStorage.setItem('cs2viewer_filters', JSON.stringify(filters));
+    }
+    const SAMPLE = {
+      "Demo 1": {
+        "rounds": [
+          {
+            "1": {
+              "at_1_tick": {
+                "teams": {
+                  "CT": {
+                    "teamStats": {"equipmentValue": 5800, "rifleCount": 1, "pistolCount": 1, "utilityTotalCount": 5, "smokeCount": 1, "heGrenadeCount": 2, "molotovCount": 2},
+                    "players": [
+                      {"name": "Hráč A", "isAlive": true, "equipment": {"armor": "KevlarHelmet", "primaryWeapon": "M4A1-S", "pistol": "Glock-18", "smoke": 1, "he": 2, "molotov": 2}},
+                      {"name": "Hráč B", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč C", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč D", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč E", "isAlive": true, "equipment": {}}
+                    ]
+                  },
+                  "T": {"teamStats": {}, "players": [
+                      {"name": "Hráč F", "isAlive": false, "equipment": {}},
+                      {"name": "Hráč G", "isAlive": false, "equipment": {}},
+                      {"name": "Hráč H", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč I", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč J", "isAlive": true, "equipment": {}}
+                  ]}
+                }
+              },
+              "at_20_seconds": {
+                "teams": {
+                  "CT": {"teamStats": {}, "players": [
+                      {"name": "Hráč A", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč B", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč C", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč D", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč E", "isAlive": true, "equipment": {}}
+                  ]},
+                  "T": {"teamStats": {}, "players": [
+                      {"name": "Hráč F", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč G", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč H", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč I", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč J", "isAlive": true, "equipment": {}}
+                  ]}
+                }
+              }
+            }
+          },
+          {
+            "2": {
+              "at_1_tick": {
+                "teams": {
+                  "CT": {"teamStats": {}, "players": [
+                      {"name": "Hráč A", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč B", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč C", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč D", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč E", "isAlive": true, "equipment": {}}
+                  ]},
+                  "T": {"teamStats": {}, "players": [
+                      {"name": "Hráč F", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč G", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč H", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč I", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč J", "isAlive": true, "equipment": {}}
+                  ]}
+                }
+              },
+              "at_20_seconds": {
+                "teams": {
+                  "CT": {"teamStats": {}, "players": [
+                      {"name": "Hráč A", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč B", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč C", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč D", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč E", "isAlive": true, "equipment": {}}
+                  ]},
+                  "T": {"teamStats": {}, "players": [
+                      {"name": "Hráč F", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč G", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč H", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč I", "isAlive": true, "equipment": {}},
+                      {"name": "Hráč J", "isAlive": true, "equipment": {}}
+                  ]}
+                }
+              }
+            }
+          }
+        ]
+      }
+    };
 
+    [viewMode, teamFilter, aliveFilter, searchPlayer].forEach(el => {
+      el.addEventListener('input', () => {
+        filters.viewMode = viewMode.value;
+        filters.team = teamFilter.value;
+        filters.alive = aliveFilter.value;
+        filters.search = searchPlayer.value.toLowerCase();
+        saveFilters();
+        if (window.currentJson) renderAll(window.currentJson);
+      });
+    });
     // --- Stav UI ---
     const state = {
       data: null,
@@ -213,10 +334,23 @@
       }
     };
 
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
     // --- Pomocné funkce ---
     const $ = sel => document.querySelector(sel);
     const $$ = sel => Array.from(document.querySelectorAll(sel));
 
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          const json = JSON.parse(event.target.result);
+          window.currentJson = json;
+          output.innerHTML = "";
+          renderAll(json);
+          addCollapsibleBehavior();
+        } catch (err) {
+          output.innerHTML = `<p class="text-red-400">Chyba při čtení JSON: ${err.message}</p>`;
     const fmt = n => (n ?? 0).toLocaleString('cs-CZ');
 
     function computePlayerValue(p) {
@@ -248,6 +382,9 @@
           if (riflesSet.has(e.primaryWeapon)) rifles++;
           if (smgSet.has(e.primaryWeapon)) smg++;
         }
+      };
+      reader.readAsText(file);
+    });
         if (e.pistol) pistols++;
         sm += e.smoke||0; he += e.he||0; mol += e.molotov||0; inc += e.incendiary||0; fl += e.flash||0;
         utils += (e.smoke||0)+(e.he||0)+(e.molotov||0)+(e.incendiary||0)+(e.decoy||0)+(e.flash||0);
@@ -270,6 +407,14 @@
       return s;
     }
 
+    function renderAll(data) {
+      output.innerHTML = '';
+      if (filters.viewMode === 'teams') {
+        renderTeams(data, output);
+      } else if (filters.viewMode === 'players') {
+        renderPlayers(data, output);
+      } else {
+        renderJson(data, output);
     function filterPlayer(p) {
       // tým filtr se uplatní na úrovni teamu, tady jen alive & query
       if (state.filters.alive==='alive' && !p.isAlive) return false;
@@ -280,6 +425,17 @@
       return true;
     }
 
+    function renderTeams(data, container) {
+      if (!data.teams) return;
+      Object.entries(data.teams).forEach(([teamName, teamData]) => {
+        if (filters.team !== 'all' && teamName !== filters.team) return;
+        const block = document.createElement('div');
+        block.className = 'card';
+        const aliveCount = Object.values(teamData.players || {}).filter(p => p.isAlive).length;
+        const deadCount = Object.values(teamData.players || {}).filter(p => !p.isAlive).length;
+        block.innerHTML = `<h2 class="font-bold text-lg">${teamName}</h2>
+                           <p>Živí: ${aliveCount} | Mrtví: ${deadCount}</p>`;
+        container.appendChild(block);
     function sortPlayers(players) {
       const key = state.sort.players;
       const q = state.filters.query;
@@ -332,6 +488,21 @@
       $('#toggle20s').checked = state.snapshots.s20;
     }
 
+    function renderPlayers(data, container) {
+      if (!data.teams) return;
+      Object.entries(data.teams).forEach(([teamName, teamData]) => {
+        Object.values(teamData.players || {}).forEach(player => {
+          if (filters.team !== 'all' && teamName !== filters.team) return;
+          if (filters.alive === 'alive' && !player.isAlive) return;
+          if (filters.alive === 'dead' && player.isAlive) return;
+          if (filters.search && !player.name.toLowerCase().includes(filters.search)) return;
+          const block = document.createElement('div');
+          block.className = 'card' + (player.isAlive ? '' : ' player-dead');
+          block.innerHTML = `<h2 class="font-bold">${player.name}</h2>
+                             <p>Tým: ${teamName}</p>
+                             <p>HP: ${player.health}</p>
+                             <p>Zbraně: ${JSON.stringify(player.weapons)}</p>`;
+          container.appendChild(block);
     // --- Render ---
     const content = document.getElementById('content');
     const emptyState = document.getElementById('emptyState');
@@ -508,6 +679,19 @@
       });
     }
 
+    function renderJson(data, container) {
+      Object.entries(data).forEach(([key, value]) => {
+        const block = document.createElement("div");
+        block.className = "mb-2";
+
+        if (typeof value === "object" && value !== null) {
+          block.innerHTML = `<div class="collapsible font-semibold text-cyan-400">▶ ${key}</div>`;
+          const content = document.createElement("div");
+          content.className = "content";
+          renderJson(value, content);
+          block.appendChild(content);
+        } else {
+          block.innerHTML = `<div><span class="text-gray-400">${key}:</span> ${value}</div>`;
     // --- Načítání dat ---
     const fileInput = document.getElementById('fileInput');
     const fileLabel = document.getElementById('fileLabel');
@@ -524,10 +708,20 @@
         } catch(err) {
           alert('Chyba při čtení JSON: '+err.message);
         }
+        container.appendChild(block);
+      });
+    }
       };
       reader.readAsText(file);
     });
 
+    function addCollapsibleBehavior() {
+      document.querySelectorAll(".collapsible").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const content = btn.nextElementSibling;
+          const isOpen = content.style.display === "block";
+          content.style.display = isOpen ? "none" : "block";
+          btn.textContent = (isOpen ? "▶" : "▼") + " " + btn.textContent.slice(2);
     document.getElementById('loadSample').addEventListener('click', ()=>{
       state.data = SAMPLE; fileLabel.textContent = 'Načtena ukázka'; renderData(state.data);
     });
@@ -612,10 +806,12 @@
           obj[r.no] = Object.fromEntries(snaps);
           return obj;
         });
+      });
         out[demoName] = { rounds: outRounds };
       }
       return out;
     }
+  </script>
 
     // Klávesové zkratky
     window.addEventListener('keydown', (e)=>{
