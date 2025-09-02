@@ -126,6 +126,7 @@
                             <input id="fileInput" type="file" accept=".json" class="hidden" />
                             <span id="fileLabel" class="text-sm">Nahrát JSON…</span>
                         </label>
+
                         <button id="exportFiltered"
                             class="px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 hover:bg-slate-800">Export
                             aktuálního výběru</button>
@@ -628,14 +629,9 @@
             reader.readAsText(file);
         });
 
-        document.getElementById('loadSample').addEventListener('click', () => {
-            state.data = SAMPLE; fileLabel.textContent = 'Načtena ukázka'; renderData(state.data);
-        });
 
         // --- Ovládací prvky ---
-        document.getElementById('roundSort').addEventListener('change', (e) => {
-            state.sort.rounds = e.target.value; localStorage.setItem('roundSort', state.sort.rounds); if (state.data) renderData(state.data);
-        });
+
         document.getElementById('playerSort').addEventListener('change', (e) => {
             state.sort.players = e.target.value; localStorage.setItem('playerSort', state.sort.players); if (state.data) renderData(state.data);
         });
