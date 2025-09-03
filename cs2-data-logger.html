@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="cs">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
             background-color: #1a202c;
             color: #e2e8f0;
         }
+
         .card {
             background-color: #2d3748;
             border: 1px solid #4a5568;
@@ -19,7 +21,9 @@
             padding: 1.5rem;
             margin-bottom: 1.5rem;
         }
-        .input-field, .select-field {
+
+        .input-field,
+        .select-field {
             background-color: #4a5568;
             color: #e2e8f0;
             border: 1px solid #718096;
@@ -28,15 +32,19 @@
             width: 100%;
             transition: border-color 0.2s;
         }
+
         .input-field[readonly] {
             background-color: #2a3343;
             cursor: default;
         }
-        .input-field:focus, .select-field:focus {
+
+        .input-field:focus,
+        .select-field:focus {
             outline: none;
             border-color: #63b3ed;
             box-shadow: 0 0 0 2px rgba(99, 179, 237, 0.5);
         }
+
         .btn {
             padding: 0.5rem 1rem;
             border-radius: 0.375rem;
@@ -45,31 +53,39 @@
             transition: background-color 0.2s, opacity 0.2s;
             border: none;
         }
+
         .btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
         }
+
         .btn-primary {
             background-color: #4299e1;
             color: white;
         }
+
         .btn-primary:hover:not(:disabled) {
             background-color: #3182ce;
         }
+
         .btn-secondary {
             background-color: #4a5568;
             color: #e2e8f0;
         }
+
         .btn-secondary:hover:not(:disabled) {
             background-color: #718096;
         }
+
         .btn-danger {
             background-color: #e53e3e;
             color: white;
         }
+
         .btn-danger:hover:not(:disabled) {
             background-color: #c53030;
         }
+
         .json-output {
             background-color: #111827;
             color: #9ca3af;
@@ -82,6 +98,7 @@
             max-height: 500px;
             overflow-y: auto;
         }
+
         .section-title {
             font-size: 1.25rem;
             font-weight: 600;
@@ -90,6 +107,7 @@
             border-bottom: 1px solid #4a5568;
             padding-bottom: 0.5rem;
         }
+
         .stats-category-title {
             font-size: 0.875rem;
             font-weight: 600;
@@ -98,14 +116,17 @@
             margin-bottom: 0.5rem;
             text-transform: uppercase;
         }
+
         .player-dead .player-equipment {
             display: none;
         }
+
         .player-dead {
             opacity: 0.5;
         }
     </style>
 </head>
+
 <body class="p-4 sm:p-6 md:p-8">
 
     <div class="max-w-6xl mx-auto">
@@ -116,37 +137,48 @@
 
         <!-- Nastavení Hráčů -->
         <div id="player-setup" class="card">
-             <h2 class="section-title">Výchozí nastavení hráčů</h2>
-             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
-                 <div>
-                     <h3 class="font-bold text-cyan-400 mb-2">CT Hráči</h3>
-                     <div id="ct-player-names" class="space-y-2" data-team="ct">
-                         <input type="text" class="input-field player-name-input" placeholder="Jméno CT Hráče 1" value="Hráč A" data-index="0">
-                         <input type="text" class="input-field player-name-input" placeholder="Jméno CT Hráče 2" value="Hráč B" data-index="1">
-                         <input type="text" class="input-field player-name-input" placeholder="Jméno CT Hráče 3" value="Hráč C" data-index="2">
-                         <input type="text" class="input-field player-name-input" placeholder="Jméno CT Hráče 4" value="Hráč D" data-index="3">
-                         <input type="text" class="input-field player-name-input" placeholder="Jméno CT Hráče 5" value="Hráč E" data-index="4">
-                     </div>
-                 </div>
-                 <div>
-                     <h3 class="font-bold text-orange-400 mb-2">T Hráči</h3>
-                     <div id="t-player-names" class="space-y-2" data-team="t">
-                         <input type="text" class="input-field player-name-input" placeholder="Jméno T Hráče 1" value="Hráč F" data-index="0">
-                         <input type="text" class="input-field player-name-input" placeholder="Jméno T Hráče 2" value="Hráč G" data-index="1">
-                         <input type="text" class="input-field player-name-input" placeholder="Jméno T Hráče 3" value="Hráč H" data-index="2">
-                         <input type="text" class="input-field player-name-input" placeholder="Jméno T Hráče 4" value="Hráč I" data-index="3">
-                         <input type="text" class="input-field player-name-input" placeholder="Jméno T Hráče 5" value="Hráč J" data-index="4">
-                     </div>
-                 </div>
-             </div>
-             <button type="button" id="swap-teams-btn" class="btn btn-secondary w-full">Prohodit týmy</button>
+            <h2 class="section-title">Výchozí nastavení hráčů</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                <div>
+                    <h3 class="font-bold text-cyan-400 mb-2">CT Hráči</h3>
+                    <div id="ct-player-names" class="space-y-2" data-team="ct">
+                        <input type="text" class="input-field player-name-input" placeholder="Jméno CT Hráče 1"
+                            value="Hráč A" data-index="0">
+                        <input type="text" class="input-field player-name-input" placeholder="Jméno CT Hráče 2"
+                            value="Hráč B" data-index="1">
+                        <input type="text" class="input-field player-name-input" placeholder="Jméno CT Hráče 3"
+                            value="Hráč C" data-index="2">
+                        <input type="text" class="input-field player-name-input" placeholder="Jméno CT Hráče 4"
+                            value="Hráč D" data-index="3">
+                        <input type="text" class="input-field player-name-input" placeholder="Jméno CT Hráče 5"
+                            value="Hráč E" data-index="4">
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-bold text-orange-400 mb-2">T Hráči</h3>
+                    <div id="t-player-names" class="space-y-2" data-team="t">
+                        <input type="text" class="input-field player-name-input" placeholder="Jméno T Hráče 1"
+                            value="Hráč F" data-index="0">
+                        <input type="text" class="input-field player-name-input" placeholder="Jméno T Hráče 2"
+                            value="Hráč G" data-index="1">
+                        <input type="text" class="input-field player-name-input" placeholder="Jméno T Hráče 3"
+                            value="Hráč H" data-index="2">
+                        <input type="text" class="input-field player-name-input" placeholder="Jméno T Hráče 4"
+                            value="Hráč I" data-index="3">
+                        <input type="text" class="input-field player-name-input" placeholder="Jméno T Hráče 5"
+                            value="Hráč J" data-index="4">
+                    </div>
+                </div>
+            </div>
+            <button type="button" id="swap-teams-btn" class="btn btn-secondary w-full">Prohodit týmy</button>
         </div>
 
         <!-- Hlavní formulář -->
         <form id="game-form" class="space-y-6">
             <div class="card">
                 <label for="demoName" class="block mb-2 font-semibold">Název CS2 hry (dema)</label>
-                <input type="text" id="demoName" name="demoName" class="input-field" placeholder="Např. Faceit_Mirage_16-12" required>
+                <input type="text" id="demoName" name="demoName" class="input-field"
+                    placeholder="Např. Faceit_Mirage_16-12" required>
             </div>
 
             <div id="rounds-container">
@@ -162,7 +194,7 @@
                 <button type="button" id="generate-json-btn" class="btn btn-primary flex-1">Generovat JSON</button>
                 <button type="button" id="copy-json-btn" class="btn btn-secondary flex-1">Kopírovat do schránky</button>
             </div>
-             <div id="message-box" class="mt-4 text-center font-medium"></div>
+            <div id="message-box" class="mt-4 text-center font-medium"></div>
             <pre id="json-output" class="json-output mt-4 hidden"></pre>
         </div>
     </div>
@@ -172,8 +204,9 @@
         <div class="card round-card relative" data-round-id="">
             <button type="button" class="btn btn-danger btn-sm absolute top-4 right-4 remove-round-btn">X</button>
             <h2 class="section-title">Kolo č. <span class="round-number-display">1</span></h2>
-            <input type="number" name="roundNumber" class="input-field mb-4" placeholder="Číslo kola" value="1" min="1" required>
-            
+            <input type="number" name="roundNumber" class="input-field mb-4" placeholder="Číslo kola" value="1" min="1"
+                required>
+
             <div class="space-y-6">
                 <div class="snapshot-container border border-gray-600 rounded-lg p-4" data-snapshot-name="at_1_tick">
                     <h3 class="font-semibold text-lg mb-4 text-gray-300">Snapshot: V 1. ticku</h3>
@@ -182,9 +215,10 @@
                         <div class="card team-card" data-team-type="T"></div>
                     </div>
                 </div>
-                <div class="snapshot-container border border-gray-600 rounded-lg p-4" data-snapshot-name="at_20_seconds">
+                <div class="snapshot-container border border-gray-600 rounded-lg p-4"
+                    data-snapshot-name="at_20_seconds">
                     <h3 class="font-semibold text-lg mb-4 text-gray-300">Snapshot: Po 20 sekundách</h3>
-                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                         <div class="card team-card" data-team-type="CT"></div>
                         <div class="card team-card" data-team-type="T"></div>
                     </div>
@@ -192,31 +226,44 @@
             </div>
         </div>
     </template>
-    
+
     <template id="team-template">
         <h3 class="text-xl font-bold mb-4">Tým: <span class="team-name-display"></span></h3>
         <div class="team-stats mb-6">
             <h4 class="stats-category-title">Ekonomika</h4>
-            <input type="number" class="input-field" name="equipmentValue" placeholder="Hodnota vybavení" min="0" value="0" readonly>
-            
+            <input type="number" class="input-field" name="equipmentValue" placeholder="Hodnota vybavení" min="0"
+                value="0" readonly>
+
             <h4 class="stats-category-title">Počet zbraní</h4>
             <div class="grid grid-cols-2 gap-2">
-                <input type="number" class="input-field" name="awpCount" placeholder="Počet AWP" min="0" value="0" readonly>
-                <input type="number" class="input-field" name="rifleCount" placeholder="Počet pušek" min="0" value="0" readonly>
-                <input type="number" class="input-field" name="smgCount" placeholder="Počet SMG" min="0" value="0" readonly>
-                <input type="number" class="input-field" name="pistolCount" placeholder="Počet pistolí (celkem)" min="0" value="0" readonly>
-                <input type="number" class="input-field col-span-2" name="nonDefaultPistolCount" placeholder="Počet non-default pistolí" min="0" value="0" readonly>
+                <input type="number" class="input-field" name="awpCount" placeholder="Počet AWP" min="0" value="0"
+                    readonly>
+                <input type="number" class="input-field" name="rifleCount" placeholder="Počet pušek" min="0" value="0"
+                    readonly>
+                <input type="number" class="input-field" name="smgCount" placeholder="Počet SMG" min="0" value="0"
+                    readonly>
+                <input type="number" class="input-field" name="pistolCount" placeholder="Počet pistolí (celkem)" min="0"
+                    value="0" readonly>
+                <input type="number" class="input-field col-span-2" name="nonDefaultPistolCount"
+                    placeholder="Počet non-default pistolí" min="0" value="0" readonly>
             </div>
 
             <h4 class="stats-category-title">Vybavení a utility</h4>
             <div class="grid grid-cols-2 gap-2">
-                <input type="number" class="input-field" name="defuserCount" placeholder="Počet defuserů" min="0" value="0" readonly>
-                <input type="number" class="input-field" name="utilityTotalCount" placeholder="Celkový počet utilit" min="0" value="0" readonly>
-                <input type="number" class="input-field" name="smokeCount" placeholder="Počet smoků" min="0" value="0" readonly>
-                <input type="number" class="input-field" name="heGrenadeCount" placeholder="Počet HE granátů" min="0" value="0" readonly>
-                <input type="number" class="input-field" name="flashbangCount" placeholder="Počet flashbangů" min="0" value="0" readonly>
-                 <input type="number" class="input-field" name="molotovCount" placeholder="Počet molotovů" min="0" value="0" readonly>
-                <input type="number" class="input-field" name="incendiaryCount" placeholder="Počet incendiary" min="0" value="0" readonly>
+                <input type="number" class="input-field" name="defuserCount" placeholder="Počet defuserů" min="0"
+                    value="0" readonly>
+                <input type="number" class="input-field" name="utilityTotalCount" placeholder="Celkový počet utilit"
+                    min="0" value="0" readonly>
+                <input type="number" class="input-field" name="smokeCount" placeholder="Počet smoků" min="0" value="0"
+                    readonly>
+                <input type="number" class="input-field" name="heGrenadeCount" placeholder="Počet HE granátů" min="0"
+                    value="0" readonly>
+                <input type="number" class="input-field" name="flashbangCount" placeholder="Počet flashbangů" min="0"
+                    value="0" readonly>
+                <input type="number" class="input-field" name="molotovCount" placeholder="Počet molotovů" min="0"
+                    value="0" readonly>
+                <input type="number" class="input-field" name="incendiaryCount" placeholder="Počet incendiary" min="0"
+                    value="0" readonly>
             </div>
         </div>
         <div class="players-container"></div>
@@ -224,19 +271,19 @@
 
     <template id="player-template">
         <div class="player-card border-t border-gray-600 pt-4 mt-4">
-             <div class="flex justify-between items-center mb-2">
-                 <p class="font-semibold player-name-display"></p>
-                 <label class="flex items-center space-x-2 text-sm cursor-pointer">
-                     <input type="checkbox" name="isAlive" class="form-checkbox bg-gray-700" checked>
-                     <span>Je naživu</span>
-                 </label>
-             </div>
-             <div class="player-equipment space-y-2">
-                 <select name="armor" class="select-field text-sm">
-                     <option value="None">Bez vesty</option>
-                     <option value="Kevlar">Kevlar</option>
-                     <option value="KevlarHelmet">Kevlar + Helma</option>
-                 </select>
+            <div class="flex justify-between items-center mb-2">
+                <p class="font-semibold player-name-display"></p>
+                <label class="flex items-center space-x-2 text-sm cursor-pointer">
+                    <input type="checkbox" name="isAlive" class="form-checkbox bg-gray-700" checked>
+                    <span>Je naživu</span>
+                </label>
+            </div>
+            <div class="player-equipment space-y-2">
+                <select name="armor" class="select-field text-sm">
+                    <option value="None">Bez vesty</option>
+                    <option value="Kevlar">Kevlar</option>
+                    <option value="KevlarHelmet">Kevlar + Helma</option>
+                </select>
                 <select name="primaryWeapon" class="select-field text-sm">
                     <option value="">Primární zbraň...</option>
                     <optgroup label="Assault Rifles">
@@ -292,340 +339,343 @@
                 <fieldset class="border border-gray-600 rounded p-2">
                     <legend class="text-xs px-1">Utility</legend>
                     <div class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
-                        <label class="flex items-center justify-between">Smoke <input type="number" name="util_smoke" min="0" max="1" value="0" class="input-field !w-16"></label>
-                        <label class="flex items-center justify-between">HE <input type="number" name="util_he" min="0" max="1" value="0" class="input-field !w-16"></label>
-                        <label class="flex items-center justify-between">Molotov <input type="number"name="util_molotov" min="0" max="1" value="0" class="input-field !w-16"></label>
-                        <label class="flex items-center justify-between">Incendiary <input type="number"name="util_incendiary" min="0" max="1" value="0" class="input-field !w-16"></label>
-                        <label class="flex items-center justify-between">Decoy <input type="number" name="util_decoy" min="0" max="1" value="0" class="input-field !w-16"></label>
-                        <label class="flex items-center justify-between">Flash <input type="number" name="util_flash" min="0" max="2" value="0" class="input-field !w-16"></label>
+                        <label class="flex items-center justify-between">Smoke <input type="number" name="util_smoke"
+                                min="0" max="1" value="0" class="input-field !w-16"></label>
+                        <label class="flex items-center justify-between">HE <input type="number" name="util_he" min="0"
+                                max="1" value="0" class="input-field !w-16"></label>
+                        <label class="flex items-center justify-between">Molotov <input type="number"
+                                name="util_molotov" min="0" max="1" value="0" class="input-field !w-16"></label>
+                        <label class="flex items-center justify-between">Incendiary <input type="number"
+                                name="util_incendiary" min="0" max="1" value="0" class="input-field !w-16"></label>
+                        <label class="flex items-center justify-between">Decoy <input type="number" name="util_decoy"
+                                min="0" max="1" value="0" class="input-field !w-16"></label>
+                        <label class="flex items-center justify-between">Flash <input type="number" name="util_flash"
+                                min="0" max="2" value="0" class="input-field !w-16"></label>
                     </div>
                 </fieldset>
                 <div class="grid grid-cols-2 gap-2 text-sm">
-                     <label class="flex items-center space-x-2"><input type="checkbox" name="hasDefuseKit" class="form-checkbox bg-gray-700"><span>Defuse Kit</span></label>
-                     <label class="flex items-center space-x-2"><input type="checkbox" name="hasZeus" class="form-checkbox bg-gray-700"><span>Zeus</span></label>
+                    <label class="flex items-center space-x-2"><input type="checkbox" name="hasDefuseKit"
+                            class="form-checkbox bg-gray-700"><span>Defuse Kit</span></label>
+                    <label class="flex items-center space-x-2"><input type="checkbox" name="hasZeus"
+                            class="form-checkbox bg-gray-700"><span>Zeus</span></label>
                 </div>
             </div>
         </div>
     </template>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const roundsContainer = document.getElementById('rounds-container');
-    const addRoundBtn = document.getElementById('add-round-btn');
-    const generateJsonBtn = document.getElementById('generate-json-btn');
-    const copyJsonBtn = document.getElementById('copy-json-btn');
-    const jsonOutput = document.getElementById('json-output');
-    const messageBox = document.getElementById('message-box');
-    const swapTeamsBtn = document.getElementById('swap-teams-btn');
-    const playerSetup = document.getElementById('player-setup');
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const roundsContainer = document.getElementById('rounds-container');
+            const addRoundBtn = document.getElementById('add-round-btn');
+            const generateJsonBtn = document.getElementById('generate-json-btn');
+            const copyJsonBtn = document.getElementById('copy-json-btn');
+            const jsonOutput = document.getElementById('json-output');
+            const messageBox = document.getElementById('message-box');
+            const swapTeamsBtn = document.getElementById('swap-teams-btn');
+            const playerSetup = document.getElementById('player-setup');
 
-    const roundTemplate = document.getElementById('round-template');
-    const teamTemplate = document.getElementById('team-template');
-    const playerTemplate = document.getElementById('player-template');
+            const roundTemplate = document.getElementById('round-template');
+            const teamTemplate = document.getElementById('team-template');
+            const playerTemplate = document.getElementById('player-template');
 
-    let roundCounter = 0;
-    
-    const PRICES = {
-        'Kevlar': 650, 'KevlarHelmet': 1000, 'hasZeus': 200, 'hasDefuseKit': 400,
-        'util_molotov': 400, 'util_incendiary': 600, 'util_decoy': 50, 'util_flash': 200, 'util_he': 300, 'util_smoke': 300,
-        'AK-47': 2700, 'M4A1-S': 2900, 'M4A4': 3100, 'SG 553': 3000, 'Galil AR': 1800, 'FAMAS': 2050, 'AUG': 3300,
-        'AWP': 4750, 'SSG 08': 1700, 'SCAR-20': 5000, 'G3SG1': 5000,
-        'UMP-45': 1200, 'MP9': 1250, 'MAC-10': 1050, 'P90': 2350, 'MP7': 1500, 'MP5-SD': 1500, 'PP-Bizon': 1400,
-        'Nova': 1050, 'XM1014': 2000, 'MAG-7': 1300, 'Sawed-Off': 1100, 'M249': 5200, 'Negev': 1700,
-        'Glock-18': 200, 'USP-S': 200, 'P2000': 200,
-        'Dual Berettas': 300, 'P250': 300, 'Tec-9': 500, 'Five-SeveN': 500, 'CZ75-Auto': 500, 'Desert Eagle': 700, 'R8 Revolver': 600
-    };
+            let roundCounter = 0;
 
-    const WEAPON_CATEGORIES = {
-        RIFLES: ['AK-47', 'M4A4', 'M4A1-S', 'SG 553', 'AUG', 'Galil AR', 'FAMAS'],
-        SNIPERS: ['AWP', 'SSG 08', 'SCAR-20', 'G3SG1'],
-        SMGS: ['UMP-45', 'MP9', 'MAC-10', 'P90', 'MP7', 'MP5-SD', 'PP-Bizon'],
-        HEAVY: ['Nova', 'XM1014', 'MAG-7', 'Sawed-Off', 'M249', 'Negev'],
-        NON_DEFAULT_PISTOLS: ['Dual Berettas', 'P250', 'Tec-9', 'Five-SeveN', 'CZ75-Auto', 'Desert Eagle', 'R8 Revolver']
-    };
+            const PRICES = {
+                'Kevlar': 650, 'KevlarHelmet': 1000, 'hasZeus': 200, 'hasDefuseKit': 400,
+                'util_molotov': 400, 'util_incendiary': 600, 'util_decoy': 50, 'util_flash': 200, 'util_he': 300, 'util_smoke': 300,
+                'AK-47': 2700, 'M4A1-S': 2900, 'M4A4': 3100, 'SG 553': 3000, 'Galil AR': 1800, 'FAMAS': 2050, 'AUG': 3300,
+                'AWP': 4750, 'SSG 08': 1700, 'SCAR-20': 5000, 'G3SG1': 5000,
+                'UMP-45': 1200, 'MP9': 1250, 'MAC-10': 1050, 'P90': 2350, 'MP7': 1500, 'MP5-SD': 1500, 'PP-Bizon': 1400,
+                'Nova': 1050, 'XM1014': 2000, 'MAG-7': 1300, 'Sawed-Off': 1100, 'M249': 5200, 'Negev': 1700,
+                'Glock-18': 200, 'USP-S': 200, 'P2000': 200,
+                'Dual Berettas': 300, 'P250': 300, 'Tec-9': 500, 'Five-SeveN': 500, 'CZ75-Auto': 500, 'Desert Eagle': 700, 'R8 Revolver': 600
+            };
 
-    const showMessage = (message, isError = false) => {
-        messageBox.textContent = message;
-        messageBox.className = `mt-4 text-center font-medium ${isError ? 'text-red-400' : 'text-green-400'}`;
-        setTimeout(() => messageBox.textContent = '', 3000);
-    };
+            const WEAPON_CATEGORIES = {
+                RIFLES: ['AK-47', 'M4A4', 'M4A1-S', 'SG 553', 'AUG', 'Galil AR', 'FAMAS'],
+                SNIPERS: ['AWP', 'SSG 08', 'SCAR-20', 'G3SG1'],
+                SMGS: ['UMP-45', 'MP9', 'MAC-10', 'P90', 'MP7', 'MP5-SD', 'PP-Bizon'],
+                HEAVY: ['Nova', 'XM1014', 'MAG-7', 'Sawed-Off', 'M249', 'Negev'],
+                NON_DEFAULT_PISTOLS: ['Dual Berettas', 'P250', 'Tec-9', 'Five-SeveN', 'CZ75-Auto', 'Desert Eagle', 'R8 Revolver']
+            };
 
-    const getPlayerNames = () => {
-        const ctNames = Array.from(document.querySelectorAll('#ct-player-names .player-name-input')).map(input => input.value);
-        const tNames = Array.from(document.querySelectorAll('#t-player-names .player-name-input')).map(input => input.value);
-        return { ct: ctNames, t: tNames };
-    };
+            const showMessage = (message, isError = false) => {
+                messageBox.textContent = message;
+                messageBox.className = `mt-4 text-center font-medium ${isError ? 'text-red-400' : 'text-green-400'}`;
+                setTimeout(() => messageBox.textContent = '', 3000);
+            };
 
-    // --- Responzivní změna jmen hráčů ---
-    playerSetup.addEventListener('input', (e) => {
-        if (!e.target.classList.contains('player-name-input')) return;
+            const getPlayerNames = () => {
+                const ctNames = Array.from(document.querySelectorAll('#ct-player-names .player-name-input')).map(input => input.value);
+                const tNames = Array.from(document.querySelectorAll('#t-player-names .player-name-input')).map(input => input.value);
+                return { ct: ctNames, t: tNames };
+            };
 
-        const newName = e.target.value;
-        const playerIndex = e.target.dataset.index;
-        const team = e.target.closest('[data-team]').dataset.team.toUpperCase();
-        
-        document.querySelectorAll(`.team-card[data-team-type="${team}"]`).forEach(teamCard => {
-            const playerDisplay = teamCard.querySelectorAll('.player-name-display')[playerIndex];
-            if(playerDisplay) {
-                playerDisplay.textContent = newName;
-            }
-        });
-    });
+            // --- Responzivní změna jmen hráčů ---
+            playerSetup.addEventListener('input', (e) => {
+                if (!e.target.classList.contains('player-name-input')) return;
 
-    swapTeamsBtn.addEventListener('click', () => {
-        const { ct, t } = getPlayerNames();
-        const ctInputs = document.querySelectorAll('#ct-player-names .player-name-input');
-        const tInputs = document.querySelectorAll('#t-player-names .player-name-input');
-        
-        ctInputs.forEach((input, i) => input.value = t[i] || '');
-        tInputs.forEach((input, i) => input.value = ct[i] || '');
-        
-        // Trigger input event to update names everywhere
-        ctInputs.forEach(input => input.dispatchEvent(new Event('input', { bubbles: true })));
-        tInputs.forEach(input => input.dispatchEvent(new Event('input', { bubbles: true })));
+                const newName = e.target.value;
+                const playerIndex = e.target.dataset.index;
+                const team = e.target.closest('[data-team]').dataset.team.toUpperCase();
 
-        showMessage('Týmy byly prohozeny.', false);
-    });
-    
-    const updateTeamStats = (teamCard) => {
-        let stats = {
-            equipmentValue: 0, awpCount: 0, rifleCount: 0, pistolCount: 0, nonDefaultPistolCount: 0, smgCount: 0,
-            defuserCount: 0, utilityTotalCount: 0, smokeCount: 0, molotovCount: 0, incendiaryCount: 0, heGrenadeCount: 0, flashbangCount: 0
-        };
+                document.querySelectorAll(`.team-card[data-team-type="${team}"]`).forEach(teamCard => {
+                    const playerDisplay = teamCard.querySelectorAll('.player-name-display')[playerIndex];
+                    if (playerDisplay) {
+                        playerDisplay.textContent = newName;
+                    }
+                });
+            });
 
-        teamCard.querySelectorAll('.player-card').forEach(playerCard => {
-            if (!playerCard.querySelector('input[name="isAlive"]').checked) return;
+            swapTeamsBtn.addEventListener('click', () => {
+                const { ct, t } = getPlayerNames();
+                const ctInputs = document.querySelectorAll('#ct-player-names .player-name-input');
+                const tInputs = document.querySelectorAll('#t-player-names .player-name-input');
 
-            const armor = playerCard.querySelector('select[name="armor"]').value;
-            if (PRICES[armor]) stats.equipmentValue += PRICES[armor];
-            
-            const primary = playerCard.querySelector('select[name="primaryWeapon"]').value;
-            if (PRICES[primary]) {
-                stats.equipmentValue += PRICES[primary];
-                if (primary === 'AWP') stats.awpCount++;
-                if (WEAPON_CATEGORIES.RIFLES.includes(primary) || WEAPON_CATEGORIES.SNIPERS.includes(primary)) stats.rifleCount++;
-                if (WEAPON_CATEGORIES.SMGS.includes(primary)) stats.smgCount++;
-            }
+                ctInputs.forEach((input, i) => input.value = t[i] || '');
+                tInputs.forEach((input, i) => input.value = ct[i] || '');
+                showMessage('Týmy byly prohozeny.', false);
+            });
 
-            const pistol = playerCard.querySelector('select[name="pistol"]').value;
-            if (pistol) {
-                stats.pistolCount++;
-                if (PRICES[pistol]) stats.equipmentValue += PRICES[pistol];
-                if (WEAPON_CATEGORIES.NON_DEFAULT_PISTOLS.includes(pistol)) stats.nonDefaultPistolCount++;
-            }
+            const updateTeamStats = (teamCard) => {
+                let stats = {
+                    equipmentValue: 0, awpCount: 0, rifleCount: 0, pistolCount: 0, nonDefaultPistolCount: 0, smgCount: 0,
+                    defuserCount: 0, utilityTotalCount: 0, smokeCount: 0, molotovCount: 0, incendiaryCount: 0, heGrenadeCount: 0, flashbangCount: 0
+                };
 
-            playerCard.querySelectorAll('input[type="number"][name^="util_"]').forEach(util => {
-                const count = parseInt(util.value) || 0;
-                if (count > 0) {
-                    stats.equipmentValue += (PRICES[util.name] || 0) * count;
-                    stats.utilityTotalCount += count;
-                    if (util.name === 'util_smoke') stats.smokeCount += count;
-                    if (util.name === 'util_molotov') stats.molotovCount += count;
-                    if (util.name === 'util_incendiary') stats.incendiaryCount += count;
-                    if (util.name === 'util_he') stats.heGrenadeCount += count;
-                    if (util.name === 'util_flash') stats.flashbangCount += count;
+                teamCard.querySelectorAll('.player-card').forEach(playerCard => {
+                    if (!playerCard.querySelector('input[name="isAlive"]').checked) return;
+
+                    const armor = playerCard.querySelector('select[name="armor"]').value;
+                    if (PRICES[armor]) stats.equipmentValue += PRICES[armor];
+
+                    const primary = playerCard.querySelector('select[name="primaryWeapon"]').value;
+                    if (PRICES[primary]) {
+                        stats.equipmentValue += PRICES[primary];
+                        if (primary === 'AWP') stats.awpCount++;
+                        if (WEAPON_CATEGORIES.RIFLES.includes(primary) || WEAPON_CATEGORIES.SNIPERS.includes(primary)) stats.rifleCount++;
+                        if (WEAPON_CATEGORIES.SMGS.includes(primary)) stats.smgCount++;
+                    }
+
+                    const pistol = playerCard.querySelector('select[name="pistol"]').value;
+                    if (pistol) {
+                        stats.pistolCount++;
+                        if (PRICES[pistol]) stats.equipmentValue += PRICES[pistol];
+                        if (WEAPON_CATEGORIES.NON_DEFAULT_PISTOLS.includes(pistol)) stats.nonDefaultPistolCount++;
+                    }
+
+                    playerCard.querySelectorAll('input[type="number"][name^="util_"]').forEach(util => {
+                        const count = parseInt(util.value) || 0;
+                        if (count > 0) {
+                            stats.equipmentValue += (PRICES[util.name] || 0) * count;
+                            stats.utilityTotalCount += count;
+                            if (util.name === 'util_smoke') stats.smokeCount += count;
+                            if (util.name === 'util_molotov') stats.molotovCount += count;
+                            if (util.name === 'util_incendiary') stats.incendiaryCount += count;
+                            if (util.name === 'util_he') stats.heGrenadeCount += count;
+                            if (util.name === 'util_flash') stats.flashbangCount += count;
+                        }
+                    });
+
+                    if (playerCard.querySelector('input[name="hasDefuseKit"]')?.checked) {
+                        stats.equipmentValue += PRICES['hasDefuseKit'] || 0;
+                        stats.defuserCount++;
+                    }
+                    if (playerCard.querySelector('input[name="hasZeus"]').checked) {
+                        stats.equipmentValue += PRICES['hasZeus'] || 0;
+                    }
+                });
+
+                for (const key in stats) {
+                    const input = teamCard.querySelector(`.team-stats input[name="${key}"]`);
+                    if (input) input.value = stats[key];
+                }
+            };
+
+            roundsContainer.addEventListener('change', (e) => {
+                if (e.target.closest('.player-equipment')) {
+                    const teamCard = e.target.closest('.team-card');
+                    if (teamCard) updateTeamStats(teamCard);
+                }
+            });
+            roundsContainer.addEventListener('input', (e) => {
+                if (e.target.closest('.player-equipment') && e.target.type === 'number') {
+                    const teamCard = e.target.closest('.team-card');
+                    if (teamCard) updateTeamStats(teamCard);
                 }
             });
 
-            if (playerCard.querySelector('input[name="hasDefuseKit"]')?.checked) {
-                stats.equipmentValue += PRICES['hasDefuseKit'] || 0;
-                stats.defuserCount++;
-            }
-            if (playerCard.querySelector('input[name="hasZeus"]').checked) {
-                stats.equipmentValue += PRICES['hasZeus'] || 0;
-            }
-        });
+            const addPlayer = (playersContainer, playerName, teamType) => {
+                const newPlayer = playerTemplate.content.cloneNode(true);
+                newPlayer.querySelector('.player-name-display').textContent = playerName;
 
-        for (const key in stats) {
-            const input = teamCard.querySelector(`.team-stats input[name="${key}"]`);
-            if (input) input.value = stats[key];
-        }
-    };
-    
-    roundsContainer.addEventListener('change', (e) => {
-        if (e.target.closest('.player-equipment')) {
-            const teamCard = e.target.closest('.team-card');
-            if (teamCard) updateTeamStats(teamCard);
-        }
-    });
-     roundsContainer.addEventListener('input', (e) => {
-        if (e.target.closest('.player-equipment') && e.target.type === 'number') {
-            const teamCard = e.target.closest('.team-card');
-            if (teamCard) updateTeamStats(teamCard);
-        }
-    });
+                // --- Podmíněné zobrazení Defuse Kitu ---
+                if (teamType !== 'CT') {
+                    const defuseKitLabel = newPlayer.querySelector('input[name="hasDefuseKit"]');
+                    if (defuseKitLabel) defuseKitLabel.closest('label').remove();
+                }
 
-    const addPlayer = (playersContainer, playerName, teamType) => {
-        const newPlayer = playerTemplate.content.cloneNode(true);
-        newPlayer.querySelector('.player-name-display').textContent = playerName;
-        
-        // --- Podmíněné zobrazení Defuse Kitu ---
-        if (teamType !== 'CT') {
-            const defuseKitLabel = newPlayer.querySelector('input[name="hasDefuseKit"]');
-            if(defuseKitLabel) defuseKitLabel.closest('label').remove();
-        }
-
-        const isAliveCheckbox = newPlayer.querySelector('input[name="isAlive"]');
-        isAliveCheckbox.addEventListener('change', (e) => {
-            const playerCard = e.target.closest('.player-card');
-            playerCard.classList.toggle('player-dead', !e.target.checked);
-            updateTeamStats(playerCard.closest('.team-card'));
-        });
-
-        playersContainer.appendChild(newPlayer);
-    };
-    
-    const populateTeam = (teamCard, teamType, playerNames) => {
-        const teamContent = teamTemplate.content.cloneNode(true);
-        const teamNameDisplay = teamContent.querySelector('.team-name-display');
-        
-        teamNameDisplay.textContent = teamType;
-        if (teamType === 'CT') {
-            teamNameDisplay.classList.add('text-cyan-400');
-        } else {
-            teamNameDisplay.classList.add('text-orange-400');
-        }
-
-        const playersContainer = teamContent.querySelector('.players-container');
-        playerNames.forEach(name => {
-            if(name) addPlayer(playersContainer, name, teamType);
-        });
-
-        teamCard.appendChild(teamContent);
-        updateTeamStats(teamCard);
-    };
-
-    const addRound = () => {
-        roundCounter++;
-        const newRound = roundTemplate.content.cloneNode(true);
-        const roundCard = newRound.querySelector('.round-card');
-        
-        roundCard.dataset.roundId = roundCounter;
-        roundCard.querySelector('.round-number-display').textContent = roundCounter;
-        const roundNumberInput = roundCard.querySelector('input[name="roundNumber"]');
-        roundNumberInput.value = roundCounter;
-
-        roundNumberInput.addEventListener('input', (e) => {
-            roundCard.querySelector('.round-number-display').textContent = e.target.value || roundCounter;
-        });
-
-        const playerNames = getPlayerNames();
-        
-        roundCard.querySelectorAll('.snapshot-container').forEach(snapshot => {
-            const ctCard = snapshot.querySelector('.team-card[data-team-type="CT"]');
-            const tCard = snapshot.querySelector('.team-card[data-team-type="T"]');
-            populateTeam(ctCard, 'CT', playerNames.ct);
-            populateTeam(tCard, 'T', playerNames.t);
-        });
-
-        roundsContainer.appendChild(newRound);
-    };
-
-    roundsContainer.addEventListener('click', (e) => {
-        if (e.target.classList.contains('remove-round-btn')) {
-            e.target.closest('.round-card').remove();
-        }
-    });
-
-    addRoundBtn.addEventListener('click', addRound);
-
-    const generateJsonData = () => {
-        // ... (JSON generation logic remains the same)
-        const gameData = {};
-        const demoNameInput = document.getElementById('demoName');
-        if (!demoNameInput.value) {
-            showMessage('Prosím, zadejte název dema.', true);
-            demoNameInput.focus();
-            return null;
-        }
-        gameData[demoNameInput.value] = { rounds: [] };
-        const roundCards = roundsContainer.querySelectorAll('.round-card');
-        roundCards.forEach(roundCard => {
-            const roundNumber = roundCard.querySelector('input[name="roundNumber"]').value;
-            if (!roundNumber) {
-                showMessage(`Kolo v bloku ${roundCard.dataset.roundId} nemá číslo.`, true);
-                throw new Error("Missing round number");
-            }
-            const roundObject = { [roundNumber]: {} };
-            roundCard.querySelectorAll('.snapshot-container').forEach(snapshot => {
-                const snapshotName = snapshot.dataset.snapshotName;
-                const snapshotObject = { teams: {} };
-                snapshot.querySelectorAll('.team-card').forEach(teamCard => {
-                    const teamType = teamCard.dataset.teamType;
-                    const teamObject = { teamStats: {}, players: [] };
-                    teamCard.querySelectorAll('.team-stats .input-field').forEach(input => {
-                        const value = parseInt(input.value);
-                        if (!isNaN(value) && value !== 0) {
-                           teamObject.teamStats[input.name] = value;
-                        }
-                    });
-                    teamCard.querySelectorAll('.player-card').forEach(playerCard => {
-                        const playerName = playerCard.querySelector('.player-name-display').textContent;
-                        const isAlive = playerCard.querySelector('input[name="isAlive"]').checked;
-                        const playerObject = { name: playerName, isAlive, equipment: {} };
-                        if (isAlive) {
-                           const armor = playerCard.querySelector('select[name="armor"]').value;
-                           if (armor !== "None") playerObject.equipment.armor = armor;
-                           const primary = playerCard.querySelector('select[name="primaryWeapon"]').value;
-                           if (primary) playerObject.equipment.primaryWeapon = primary;
-                           const pistol = playerCard.querySelector('select[name="pistol"]').value;
-                           if (pistol) playerObject.equipment.pistol = pistol;
-                           playerCard.querySelectorAll('input[type="number"][name^="util_"]').forEach(util => {
-                               const utilCount = parseInt(util.value);
-                               if (utilCount > 0) {
-                                   playerObject.equipment[util.name.replace('util_', '')] = utilCount;
-                               }
-                           });
-                           const defuseKit = playerCard.querySelector('input[name="hasDefuseKit"]');
-                           if(defuseKit && defuseKit.checked) playerObject.equipment.hasDefuseKit = true;
-                           if(playerCard.querySelector('input[name="hasZeus"]').checked) playerObject.equipment.hasZeus = true;
-                        }
-                        teamObject.players.push(playerObject);
-                    });
-                    snapshotObject.teams[teamType] = teamObject;
+                const isAliveCheckbox = newPlayer.querySelector('input[name="isAlive"]');
+                isAliveCheckbox.addEventListener('change', (e) => {
+                    const playerCard = e.target.closest('.player-card');
+                    playerCard.classList.toggle('player-dead', !e.target.checked);
+                    updateTeamStats(playerCard.closest('.team-card'));
                 });
-                roundObject[roundNumber][snapshotName] = snapshotObject;
-            });
-            gameData[demoNameInput.value].rounds.push(roundObject);
-        });
-        return gameData;
-    };
-    
-    generateJsonBtn.addEventListener('click', () => {
-        try {
-            const gameData = generateJsonData();
-            if (gameData) {
-                const jsonString = JSON.stringify(gameData, null, 2);
-                jsonOutput.textContent = jsonString;
-                jsonOutput.classList.remove('hidden');
-                showMessage('JSON úspěšně vygenerován!', false);
-            }
-        } catch (error) {
-            console.error("Chyba při generování JSON:", error);
-        }
-    });
 
-    copyJsonBtn.addEventListener('click', () => {
-        if (jsonOutput.textContent && !jsonOutput.classList.contains('hidden')) {
-            const textarea = document.createElement('textarea');
-            textarea.value = jsonOutput.textContent;
-            document.body.appendChild(textarea);
-            textarea.select();
-            try {
-                document.execCommand('copy');
-                showMessage('JSON zkopírován do schránky!', false);
-            } catch (err) {
-                showMessage('Chyba při kopírování.', true);
-                console.error('Copy failed', err);
-            }
-            document.body.removeChild(textarea);
-        } else {
-            showMessage('Není co kopírovat. Nejprve vygenerujte JSON.', true);
-        }
-    });
-});
-</script>
+                playersContainer.appendChild(newPlayer);
+            };
+
+            const populateTeam = (teamCard, teamType, playerNames) => {
+                const teamContent = teamTemplate.content.cloneNode(true);
+                const teamNameDisplay = teamContent.querySelector('.team-name-display');
+
+                teamNameDisplay.textContent = teamType;
+                if (teamType === 'CT') {
+                    teamNameDisplay.classList.add('text-cyan-400');
+                } else {
+                    teamNameDisplay.classList.add('text-orange-400');
+                }
+
+                const playersContainer = teamContent.querySelector('.players-container');
+                playerNames.forEach(name => {
+                    if (name) addPlayer(playersContainer, name, teamType);
+                });
+
+                teamCard.appendChild(teamContent);
+                updateTeamStats(teamCard);
+            };
+
+            const addRound = () => {
+                roundCounter++;
+                const newRound = roundTemplate.content.cloneNode(true);
+                const roundCard = newRound.querySelector('.round-card');
+
+                roundCard.dataset.roundId = roundCounter;
+                roundCard.querySelector('.round-number-display').textContent = roundCounter;
+                const roundNumberInput = roundCard.querySelector('input[name="roundNumber"]');
+                roundNumberInput.value = roundCounter;
+
+                roundNumberInput.addEventListener('input', (e) => {
+                    roundCard.querySelector('.round-number-display').textContent = e.target.value || roundCounter;
+                });
+
+                const playerNames = getPlayerNames();
+
+                roundCard.querySelectorAll('.snapshot-container').forEach(snapshot => {
+                    const ctCard = snapshot.querySelector('.team-card[data-team-type="CT"]');
+                    const tCard = snapshot.querySelector('.team-card[data-team-type="T"]');
+                    populateTeam(ctCard, 'CT', playerNames.ct);
+                    populateTeam(tCard, 'T', playerNames.t);
+                });
+
+                roundsContainer.appendChild(newRound);
+            };
+
+            roundsContainer.addEventListener('click', (e) => {
+                if (e.target.classList.contains('remove-round-btn')) {
+                    e.target.closest('.round-card').remove();
+                }
+            });
+
+            addRoundBtn.addEventListener('click', addRound);
+
+            const generateJsonData = () => {
+                // ... (JSON generation logic remains the same)
+                const gameData = {};
+                const demoNameInput = document.getElementById('demoName');
+                if (!demoNameInput.value) {
+                    showMessage('Prosím, zadejte název dema.', true);
+                    demoNameInput.focus();
+                    return null;
+                }
+                gameData[demoNameInput.value] = { rounds: [] };
+                const roundCards = roundsContainer.querySelectorAll('.round-card');
+                roundCards.forEach(roundCard => {
+                    const roundNumber = roundCard.querySelector('input[name="roundNumber"]').value;
+                    if (!roundNumber) {
+                        showMessage(`Kolo v bloku ${roundCard.dataset.roundId} nemá číslo.`, true);
+                        throw new Error("Missing round number");
+                    }
+                    const roundObject = { [roundNumber]: {} };
+                    roundCard.querySelectorAll('.snapshot-container').forEach(snapshot => {
+                        const snapshotName = snapshot.dataset.snapshotName;
+                        const snapshotObject = { teams: {} };
+                        snapshot.querySelectorAll('.team-card').forEach(teamCard => {
+                            const teamType = teamCard.dataset.teamType;
+                            const teamObject = { teamStats: {}, players: [] };
+                            teamCard.querySelectorAll('.team-stats .input-field').forEach(input => {
+                                const value = parseInt(input.value);
+                                if (!isNaN(value) && value !== 0) {
+                                    teamObject.teamStats[input.name] = value;
+                                }
+                            });
+                            teamCard.querySelectorAll('.player-card').forEach(playerCard => {
+                                const playerName = playerCard.querySelector('.player-name-display').textContent;
+                                const isAlive = playerCard.querySelector('input[name="isAlive"]').checked;
+                                const playerObject = { name: playerName, isAlive, equipment: {} };
+                                if (isAlive) {
+                                    const armor = playerCard.querySelector('select[name="armor"]').value;
+                                    if (armor !== "None") playerObject.equipment.armor = armor;
+                                    const primary = playerCard.querySelector('select[name="primaryWeapon"]').value;
+                                    if (primary) playerObject.equipment.primaryWeapon = primary;
+                                    const pistol = playerCard.querySelector('select[name="pistol"]').value;
+                                    if (pistol) playerObject.equipment.pistol = pistol;
+                                    playerCard.querySelectorAll('input[type="number"][name^="util_"]').forEach(util => {
+                                        const utilCount = parseInt(util.value);
+                                        if (utilCount > 0) {
+                                            playerObject.equipment[util.name.replace('util_', '')] = utilCount;
+                                        }
+                                    });
+                                    const defuseKit = playerCard.querySelector('input[name="hasDefuseKit"]');
+                                    if (defuseKit && defuseKit.checked) playerObject.equipment.hasDefuseKit = true;
+                                    if (playerCard.querySelector('input[name="hasZeus"]').checked) playerObject.equipment.hasZeus = true;
+                                }
+                                teamObject.players.push(playerObject);
+                            });
+                            snapshotObject.teams[teamType] = teamObject;
+                        });
+                        roundObject[roundNumber][snapshotName] = snapshotObject;
+                    });
+                    gameData[demoNameInput.value].rounds.push(roundObject);
+                });
+                return gameData;
+            };
+
+            generateJsonBtn.addEventListener('click', () => {
+                try {
+                    const gameData = generateJsonData();
+                    if (gameData) {
+                        const jsonString = JSON.stringify(gameData, null, 2);
+                        jsonOutput.textContent = jsonString;
+                        jsonOutput.classList.remove('hidden');
+                        showMessage('JSON úspěšně vygenerován!', false);
+                    }
+                } catch (error) {
+                    console.error("Chyba při generování JSON:", error);
+                }
+            });
+
+            copyJsonBtn.addEventListener('click', () => {
+                if (jsonOutput.textContent && !jsonOutput.classList.contains('hidden')) {
+                    const textarea = document.createElement('textarea');
+                    textarea.value = jsonOutput.textContent;
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    try {
+                        document.execCommand('copy');
+                        showMessage('JSON zkopírován do schránky!', false);
+                    } catch (err) {
+                        showMessage('Chyba při kopírování.', true);
+                        console.error('Copy failed', err);
+                    }
+                    document.body.removeChild(textarea);
+                } else {
+                    showMessage('Není co kopírovat. Nejprve vygenerujte JSON.', true);
+                }
+            });
+        });
+    </script>
 
 </body>
-</html>
 
+</html>
