@@ -316,21 +316,22 @@
         <div class="players-container"></div>
     </template>
 
-     <template id="player-template">
+      <template id="player-template">
         <div class="player-card border-t border-gray-600 pt-4 mt-4 rounded-md p-2 transition-all duration-300">
-             <div class="flex justify-between items-center mb-2">
+            <div class="flex justify-between items-center mb-2">
                 <div class="flex items-center gap-2">
                     <p class="font-semibold player-name-display"></p>
                     <button type="button" class="btn btn-secondary btn-sm reset-player-btn">Reset</button>
-                    <button type="button" class="btn btn-secondary btn-sm copy-single-player-btn" title="Kopírovat z 1. ticku">➔</button>
+                    <button type="button" class="btn btn-secondary btn-sm copy-single-player-btn"
+                        title="Kopírovat z 1. ticku">➔</button>
                 </div>
-                 <label class="flex items-center space-x-2 text-sm cursor-pointer is-alive-label">
-                     <input type="checkbox" name="isAlive" class="form-checkbox bg-gray-700" checked>
-                     <span>Naživu</span>
-                 </label>
-             </div>
-             <div class="player-equipment space-y-2">
-               
+                <label class="flex items-center space-x-2 text-sm cursor-pointer is-alive-label">
+                    <input type="checkbox" name="isAlive" class="form-checkbox bg-gray-700" checked>
+                    <span>Naživu</span>
+                </label>
+            </div>
+            <div class="player-equipment space-y-2">
+
                 <select name="primaryWeapon" class="select-field text-sm">
                     <option value="">Primární zbraň...</option>
                     <optgroup label="Assault Rifles">
@@ -386,23 +387,33 @@
                 <fieldset class="border border-gray-600 rounded p-2">
                     <legend class="text-xs px-1">Utility</legend>
                     <div class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
-                         <label class="flex items-center justify-between">Molotov <input type="number"name="util_molotov" min="0" max="1" value="0" class="input-field !w-16"></label>
-                        <label class="flex items-center justify-between">Incendiary <input type="number"name="util_incendiary" min="0" max="1" value="0" class="input-field !w-16"></label>
-                        <label class="flex items-center justify-between">Smoke <input type="number" name="util_smoke" min="0" max="1" value="0" class="input-field !w-16"></label>
-                        <label class="flex items-center justify-between">Decoy <input type="number" name="util_decoy" min="0" max="1" value="0" class="input-field !w-16"></label>
-                        <label class="flex items-center justify-between">Flash <input type="number" name="util_flash" min="0" max="2" value="0" class="input-field !w-16"></label>
-                        <label class="flex items-center justify-between">HE <input type="number" name="util_he" min="0" max="1" value="0" class="input-field !w-16"></label>
+                        <label class="flex items-center justify-between">Molotov <input type="number"
+                                name="util_molotov" min="0" max="1" value="0" class="input-field !w-16"></label>
+                        <label class="flex items-center justify-between">Incendiary <input type="number"
+                                name="util_incendiary" min="0" max="1" value="0" class="input-field !w-16"></label>
+                        <label class="flex items-center justify-between">Smoke <input type="number" name="util_smoke"
+                                min="0" max="1" value="0" class="input-field !w-16"></label>
+                        <label class="flex items-center justify-between">Decoy <input type="number" name="util_decoy"
+                                min="0" max="1" value="0" class="input-field !w-16"></label>
+                        <label class="flex items-center justify-between">Flash <input type="number" name="util_flash"
+                                min="0" max="2" value="0" class="input-field !w-16"></label>
+                        <label class="flex items-center justify-between">HE <input type="number" name="util_he" min="0"
+                                max="1" value="0" class="input-field !w-16"></label>
+
+
                     </div>
                 </fieldset>
                 <div class="grid grid-cols-2 gap-2 text-sm">
-                     <label class="flex items-center space-x-2"><input type="checkbox" name="hasDefuseKit" class="form-checkbox bg-gray-700"><span>Defuse Kit</span></label>
-                     <label class="flex items-center space-x-2"><input type="checkbox" name="hasZeus" class="form-checkbox bg-gray-700"><span>Zeus</span></label>
+                    <label class="flex items-center space-x-2"><input type="checkbox" name="hasDefuseKit"
+                            class="form-checkbox bg-gray-700"><span>Defuse Kit</span></label>
+                    <label class="flex items-center space-x-2"><input type="checkbox" name="hasZeus"
+                            class="form-checkbox bg-gray-700"><span>Zeus</span></label>
                 </div>
                 <select name="armor" class="select-field text-sm">
-                     <option value="None">Bez vesty</option>
-                     <option value="Kevlar">Kevlar</option>
-                     <option value="KevlarHelmet">Kevlar + Helma</option>
-                 </select>
+                    <option value="None">Bez vesty</option>
+                    <option value="Kevlar">Kevlar</option>
+                    <option value="KevlarHelmet">Kevlar + Helma</option>
+                </select>
             </div>
         </div>
     </template>
