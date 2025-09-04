@@ -324,11 +324,6 @@
                 </label>
             </div>
             <div class="player-equipment space-y-2">
-                <select name="armor" class="select-field text-sm">
-                    <option value="None">Bez vesty</option>
-                    <option value="Kevlar">Kevlar</option>
-                    <option value="KevlarHelmet">Kevlar + Helma</option>
-                </select>
                 <select name="primaryWeapon" class="select-field text-sm">
                     <option value="">Primární zbraň...</option>
                     <optgroup label="Assault Rifles">
@@ -383,21 +378,28 @@
                 </select>
                 <fieldset class="border border-gray-600 rounded p-2">
                     <legend class="text-xs px-1">Utility</legend>
+                    
                     <div class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
-                        <label class="flex items-center justify-between">Smoke <input type="number" name="util_smoke"
-                                min="0" max="1" value="0" class="input-field !w-16"></label>
-                        <label class="flex items-center justify-between">HE <input type="number" name="util_he" min="0"
-                                max="1" value="0" class="input-field !w-16"></label>
-                        <label class="flex items-center justify-between">Molotov <input type="number"
+                         <label class="flex items-center justify-between">Molotov <input type="number"
                                 name="util_molotov" min="0" max="1" value="0" class="input-field !w-16"></label>
                         <label class="flex items-center justify-between">Incendiary <input type="number"
                                 name="util_incendiary" min="0" max="1" value="0" class="input-field !w-16"></label>
+                        <label class="flex items-center justify-between">Smoke <input type="number" name="util_smoke"
+                                min="0" max="1" value="0" class="input-field !w-16"></label>                       
                         <label class="flex items-center justify-between">Decoy <input type="number" name="util_decoy"
                                 min="0" max="1" value="0" class="input-field !w-16"></label>
                         <label class="flex items-center justify-between">Flash <input type="number" name="util_flash"
                                 min="0" max="2" value="0" class="input-field !w-16"></label>
+                        <label class="flex items-center justify-between">HE <input type="number" name="util_he" min="0"
+                                max="1" value="0" class="input-field !w-16"></label>
                     </div>
                 </fieldset>
+        
+                <select name="armor" class="select-field text-sm">
+                    <option value="None">Bez vesty</option>
+                    <option value="Kevlar">Kevlar</option>
+                    <option value="KevlarHelmet">Kevlar + Helma</option>
+                </select>
                 <div class="grid grid-cols-2 gap-2 text-sm">
                     <label class="flex items-center space-x-2"><input type="checkbox" name="hasDefuseKit"
                             class="form-checkbox bg-gray-700"><span>Defuse Kit</span></label>
