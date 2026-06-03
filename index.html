@@ -1,138 +1,359 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Name - GitHub Page</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #f5f7fa, #e4ecf7);
-      color: #222;
-      line-height: 1.6;
-      padding: 0 1rem;
-    }
-    header {
-      max-width: 800px;
-      margin: 4rem auto 2rem auto;
-      text-align: center;
-    }
-    header h1 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      background: linear-gradient(90deg, #4f46e5, #9333ea);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    header p {
-      font-size: 1.1rem;
-      color: #555;
-      margin-top: 0.5rem;
-    }
-    section {
-      max-width: 800px;
-      margin: 2rem auto;
-      background: #fff;
-      border-radius: 14px;
-      padding: 2rem;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-    }
-    section h2 {
-      font-size: 1.4rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      color: #333;
-      border-left: 4px solid #6366f1;
-      padding-left: 0.5rem;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    .card {
-      background: #f9fafb;
-      padding: 1rem;
-      border-radius: 10px;
-      text-align: center;
-      font-weight: 500;
-      color: #444;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-    }
-    .links {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 1rem;
-    }
-    .links a {
-      color: #4f46e5;
-      text-decoration: none;
-      font-weight: 500;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.2s ease;
-    }
-    .links a:hover {
-      border-color: #4f46e5;
-    }
-    footer {
-      text-align: center;
-      font-size: 0.9rem;
-      color: #666;
-      margin: 3rem 0;
-    }
-  </style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Marek Kozel | Software Engineer & Developer</title>
+
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					colors: {
+						dark: '#0a0a0a',
+						card: '#171717',
+						accent: '#10b981',
+					}
+				}
+			}
+		}
+	</script>
+
+	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
 </head>
-<body>
 
-  <header>
-    <h1>Your Name</h1>
-    <p>Developer • Builder • Curious Mind</p>
-  </header>
+<body class="bg-dark text-gray-200 antialiased selection:bg-blue-500 selection:text-white relative overflow-x-hidden">
 
-  <section>
-    <h2>About</h2>
-    <p>
-      I like creating simple, scalable solutions and exploring new technologies. 
-      My interests range from full-stack development to design systems and open-source projects.
-    </p>
-  </section>
+	<div class="fixed inset-0 z-0 pointer-events-none bg-grid-pattern grid-mask"></div>
 
-  <section>
-    <h2>Tech Stack</h2>
-    <div class="grid">
-      <div class="card">JavaScript</div>
-      <div class="card">Python</div>
-      <div class="card">C++</div>
-      <div class="card">React</div>
-      <div class="card">Node.js</div>
-      <div class="card">Docker</div>
-    </div>
-  </section>
+	<main class="relative z-10">
+		<nav class="fixed w-full z-50 bg-dark/80 backdrop-blur-md border-b border-gray-800" data-aos="fade-down"
+			data-aos-duration="800">
+			<div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+				<a href="#" class="text-2xl font-bold tracking-tighter text-white">MK<span class="text-blue-500">.</span></a>
+				<div class="space-x-6 text-sm font-medium">
+					<a href="#about" class="hover:text-blue-400 transition-colors">About</a>
+					<a href="#roadmap" class="hover:text-blue-400 transition-colors">Journey</a>
+					<a href="#projects" class="hover:text-blue-400 transition-colors">Projects</a>
+				</div>
+			</div>
+		</nav>
 
-  <section>
-    <h2>Connect</h2>
-    <div class="links">
-      <a href="https://yourwebsite.com">Portfolio</a>
-      <a href="https://linkedin.com/in/yourprofile">LinkedIn</a>
-      <a href="https://github.com/yourusername">GitHub</a>
-    </div>
-  </section>
+		<section class="min-h-screen flex items-center justify-center pt-20 px-6 relative">
+			<div
+				class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/10 via-transparent to-transparent pointer-events-none">
+			</div>
+			<div class="max-w-4xl mx-auto text-center relative">
+				<div data-aos="zoom-in" data-aos-duration="1000"
+					class="w-60 h-60 mx-auto mb-8 rounded-full bg-gray-800 p-1 bg-gradient-to-tr from-emerald-500 to-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.3)]">
+					<img src="images/profile_c.png" alt="Marek Kozel"
+						class="w-full h-full object-cover rounded-full border-4 border-dark">
+				</div>
 
-  <footer>
-    © 2025 Your Name — Crafted with care
-  </footer>
+				<p data-aos="fade-up" data-aos-delay="100"
+					class="gradient-text font-semibold tracking-widest uppercase text-sm mb-4">Hello, I'm</p>
+				<h1 data-aos="fade-up" data-aos-delay="200"
+					class="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">Marek Kozel</h1>
+				<h2 data-aos="fade-up" data-aos-delay="300" class="text-2xl md:text-3xl font-medium text-gray-400 mb-8">
+					Computer Science Student <br class="md:hidden"> & <span class="gradient-text">Software Engineer</span>
+				</h2>
+				<p data-aos="fade-up" data-aos-delay="400"
+					class="text-lg text-gray-400 max-w-2x2 mx-auto mb-10 leading-relaxed">
+					Currently studying at VŠB - Technical University of Ostrava. I specialize in C++/Python, game development,
+					Artificial Intelligence (Neural Networks) and Automation.
+				</p>
+				<div data-aos="fade-up" data-aos-delay="500" class="flex justify-center gap-4">
+					<a href="#projects"
+						class="px-8 py-3 bg-gradient-to-r from-emerald-500 to-blue-600 text-white font-semibold rounded-md hover:from-emerald-400 hover:to-blue-500 transition-all shadow-lg shadow-blue-500/25">View
+						My Work</a>
+					<a href="https://github.com/marekkozel" target="_blank"
+						class="px-8 py-3 bg-card border border-gray-700 text-white font-semibold rounded-md hover:border-blue-500 transition-all">GitHub</a>
+				</div>
+			</div>
+		</section>
 
+		<section id="about" class="py-24 px-6 border-y border-gray-800 section-glow bg-dots">
+			<div class="max-w-4xl mx-auto section-content">
+				<h3 data-aos="fade-right" class="text-3xl font-bold mb-8 flex items-center text-emerald">
+					<span class="w-8 h-[2px] bg-gradient-to-r from-emerald-500 to-blue-500 mr-4"></span> About Me
+				</h3>
+				<div class="grid md:grid-cols-2 gap-12 items-center">
+					<div data-aos="fade-up" class="space-y-4 text-gray-400 leading-relaxed">
+						<p>
+							I am a deeply curious developer with a strong foundation in lower-level programming and infrastructure. As
+							a high-achieving student at VŠB-TUO, I balance my rigorous academic schedule with hands-on software
+							engineering.
+						</p>
+						<p>
+							My technical interests are broad: I love building rendering engines from scratch in C++, orchestrating
+							complex B2B automations using n8n and Docker, and pushing the boundaries of AI integration.
+						</p>
+					</div>
+					<div data-aos="fade-left"
+						class="rounded-lg overflow-hidden bg-gray-800 aspect-video relative group border border-gray-700 shadow-[0_0_20px_rgba(73,235,181,0.2)] ">
+						<img src="images/coffee_nature.jpg" alt="Coffee and Nature" class="w-full h-full object-cover opacity-80">
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="roadmap" class="py-24 px-6 relative z-10">
+			<div class="max-w-5xl mx-auto">
+				<h3 data-aos="fade-up" class="text-3xl font-bold text-blue mb-16 flex items-center justify-center">
+					My Journey
+				</h3>
+
+				<div class="relative pb-20 md:ml-40 ml-10" id="timeline-container">
+
+					<div class="absolute left-0 top-12 bottom-12 w-[2px] bg-gray-800 rounded-full"></div>
+
+					<div id="timeline-progress"
+						class="absolute left-0 top-12 w-[2px] bg-accent rounded-full z-10 shadow-[0_0_8px_rgba(16,185,129,0.8)]"
+						style="height: 0%;"></div>
+
+					<div class="flex flex-col md:flex-row justify-start pt-10 md:pt-20 relative milestone">
+						<div class="sticky top-40 flex flex-col md:flex-row items-center self-start z-20 md:-ml-40 md:w-32">
+							<h3
+								class="timeline-year hidden md:block text-3xl font-bold text-gray-500 bg-dark py-2 pr-6 transition-colors duration-300">
+								2026</h3>
+						</div>
+						<div
+							class="absolute -left-[23px] w-12 h-12 rounded-full bg-dark flex items-center justify-center border-2 border-gray-800 z-20 mt-10 md:mt-0">
+							<div class="timeline-dot h-4 w-4 rounded-full bg-gray-600 transition-all duration-300"></div>
+						</div>
+						<div class="pl-12 md:pl-20 w-full" data-aos="fade-up">
+							<h3
+								class="md:hidden block text-2xl font-bold text-gray-400 mb-4 mt-8 timeline-year transition-colors duration-300">
+								2026</h3>
+							<p class="text-gray-400 text-sm md:text-base leading-relaxed mb-6">
+								Currently planning my Bachelor's thesis focused on measuring the emotions of computer game players using
+								neural networks. Operating as a B2B IT contractor engineering advanced n8n automations.
+							</p>
+							<div class="grid grid-cols-2 gap-4">
+								<img src="https://via.placeholder.com/400x300?text=Thesis+or+Code"
+									class="rounded-lg object-cover h-32 md:h-48 w-full border border-gray-800">
+								<img src="https://via.placeholder.com/400x300?text=n8n+Workflows"
+									class="rounded-lg object-cover h-32 md:h-48 w-full border border-gray-800">
+							</div>
+						</div>
+					</div>
+
+					<div class="flex flex-col md:flex-row justify-start pt-10 md:pt-32 relative milestone">
+						<div class="sticky top-40 flex flex-col md:flex-row items-center self-start z-20 md:-ml-40 md:w-32">
+							<h3
+								class="timeline-year hidden md:block text-3xl font-bold text-gray-500 bg-dark py-2 pr-6 transition-colors duration-300">
+								2025</h3>
+						</div>
+						<div
+							class="absolute -left-[23px] w-12 h-12 rounded-full bg-dark flex items-center justify-center border-2 border-gray-800 z-20 mt-10 md:mt-0">
+							<div class="timeline-dot h-4 w-4 rounded-full bg-gray-600 transition-all duration-300"></div>
+						</div>
+						<div class="pl-12 md:pl-20 w-full" data-aos="fade-up">
+							<h3
+								class="md:hidden block text-2xl font-bold text-gray-400 mb-4 mt-8 timeline-year transition-colors duration-300">
+								2025</h3>
+							<p class="text-gray-400 text-sm md:text-base leading-relaxed mb-6">
+								Planned and executed an 11,000 km expedition to Georgia using a mechanically modified Octavia 1 named
+								"Matylda". Continued academic excellence at VŠB-TUO, maintaining a study average above 95%.
+							</p>
+							<div class="grid grid-cols-2 gap-4">
+								<img src="https://via.placeholder.com/400x300?text=Georgia+Expedition"
+									class="rounded-lg object-cover h-32 md:h-48 w-full border border-gray-800">
+								<img src="https://via.placeholder.com/400x300?text=Matylda+Car"
+									class="rounded-lg object-cover h-32 md:h-48 w-full border border-gray-800">
+							</div>
+						</div>
+					</div>
+
+					<div class="flex flex-col md:flex-row justify-start pt-10 md:pt-32 relative milestone">
+						<div class="sticky top-40 flex flex-col md:flex-row items-center self-start z-20 md:-ml-40 md:w-32">
+							<h3
+								class="timeline-year hidden md:block text-xl font-bold text-gray-500 bg-dark py-2 pr-6 transition-colors duration-300">
+								Earlier</h3>
+						</div>
+						<div
+							class="absolute -left-[23px] w-12 h-12 rounded-full bg-dark flex items-center justify-center border-2 border-gray-800 z-20 mt-10 md:mt-0">
+							<div class="timeline-dot h-4 w-4 rounded-full bg-gray-600 transition-all duration-300"></div>
+						</div>
+						<div class="pl-12 md:pl-20 w-full" data-aos="fade-up">
+							<h3
+								class="md:hidden block text-2xl font-bold text-gray-400 mb-4 mt-8 timeline-year transition-colors duration-300">
+								Earlier</h3>
+							<p class="text-gray-400 text-sm md:text-base leading-relaxed mb-6">
+								A period of foundational growth.
+							</p>
+							<div class="mb-6 space-y-3">
+								<ul class="list-disc list-inside text-gray-300 text-sm md:text-base font-semibold mb-4"></ul>
+								<li>
+									<div class="flex gap-3 text-gray-300 text-sm md:text-base">
+										Co-founded student startup 'Drip', assisting in scaling it to over 20 employees.</div>
+								</li>
+								<li>
+									<div class="flex gap-3 text-gray-300 text-sm md:text-base"> Won 1st
+										Place internationally as Lead Engineer in the ESA CanSat competition.</div>
+								</li>
+								<li>
+									<div class="flex gap-3 text-gray-300 text-sm md:text-base"> Founded
+										POJSpace, a student technology incubator and hardware lab at my high school.</div>
+								</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+
+		<section id="projects" class="py-24 px-6 border-t border-gray-800 section-glow bg-dots">
+			<div class="max-w-6xl mx-auto section-content">
+				<h3 data-aos="fade-right" class="text-3xl font-bold mb-8 flex items-center text-emerald">
+					<span class="w-8 h-[2px] bg-gradient-to-r from-emerald-500 to-blue-500 mr-4"></span> Projects
+				</h3>
+
+				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+					<div data-aos="fade-up" data-aos-delay="100"
+						class="bg-dark p-6 rounded-lg border border-gray-800 hover:border-blue-500 transition-colors duration-300 group relative overflow-hidden shadow-lg hover:shadow-blue-500/10">
+						<div class="w-full h-40 bg-gray-900 rounded-md mb-4 overflow-hidden relative">
+							<img src="images/cubes_battle.png"
+								class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100">
+						</div>
+						<h4 class="text-xl font-bold text-white mb-2">Cubes-Battle</h4>
+						<p class="text-sm font-semibold gradient-text mb-4">C</p>
+						<p class="text-gray-400 text-sm">A game developed entirely from scratch using pure C, bypassing
+							traditional game engines.</p>
+					</div>
+
+					<div data-aos="fade-up" data-aos-delay="200"
+						class="bg-dark p-6 rounded-lg border border-gray-800 hover:border-blue-500 transition-colors duration-300 group relative overflow-hidden shadow-lg hover:shadow-blue-500/10">
+						<div class="w-full h-40 bg-gray-900 rounded-md mb-4 overflow-hidden relative">
+							<img src="images/OpenGL.png"
+								class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100">
+						</div>
+						<h4 class="text-xl font-bold text-white mb-2">OpenGL Render Engine</h4>
+						<p class="text-sm font-semibold gradient-text mb-4">C++ / OpenGL</p>
+						<p class="text-gray-400 text-sm">A custom 3D rendering engine built from the ground up in C++ to master
+							graphics programming.</p>
+					</div>
+
+					<div data-aos="fade-up" data-aos-delay="300"
+						class="bg-dark p-6 rounded-lg border border-gray-800 hover:border-blue-500 transition-colors duration-300 group relative overflow-hidden shadow-lg hover:shadow-blue-500/10">
+						<div class="w-full h-40 bg-gray-900 rounded-md mb-4 overflow-hidden relative">
+							<img src="images/POJSpace.png"
+								class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100">
+						</div>
+						<h4 class="text-xl font-bold text-white mb-2">AI Courses</h4>
+						<p class="text-sm font-semibold gradient-text mb-4">Curriculum Design</p>
+						<p class="text-gray-400 text-sm">Designed and developed artificial intelligence course materials
+							specifically tailored for high school students.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<footer class="bg-dark py-12 border-t border-gray-800 text-center">
+			<div class="max-w-4xl mx-auto px-6">
+				<h2 class="text-2xl font-bold gradient-text mb-6">Let's Connect</h2>
+				<div class="flex justify-center gap-6 mb-8">
+					<a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">GitHub</a>
+					<a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">LinkedIn</a>
+					<a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">YouTube (Fishing)</a>
+					<a href="mailto:your.email@example.com" class="text-gray-400 hover:text-blue-400 transition-colors">Email</a>
+				</div>
+				<p class="text-gray-600 text-sm">
+					&copy;
+					<script>document.write(new Date().getFullYear())</script> Marek Kozel.
+				</p>
+			</div>
+		</footer>
+	</main>
+
+	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+	<script>
+		// Init general fade animations
+		AOS.init({ once: true, offset: 100, duration: 800 });
+
+		// --- SMOOTH TIMELINE LOGIC ---
+		const container = document.getElementById('timeline-container');
+		const progressLine = document.getElementById('timeline-progress');
+		const milestones = document.querySelectorAll('.milestone');
+
+		let targetProgress = 0;
+		let currentProgress = 0;
+
+		// Mathematical interpolation for buttery smooth movement
+		function lerp(start, end, factor) {
+			return start + (end - start) * factor;
+		}
+
+		// Calculate scroll target based on the middle of the screen
+		function updateScroll() {
+			if (!container) return;
+			const rect = container.getBoundingClientRect();
+			const triggerPoint = window.innerHeight * 0.5; // Trigger at exactly 50% screen height
+
+			// Distance scrolled past the trigger point
+			const scrollDistance = triggerPoint - rect.top;
+
+			// Calculate percentage (0 to 1)
+			const rawProgress = scrollDistance / rect.height;
+			targetProgress = Math.max(0, Math.min(1, rawProgress));
+		}
+
+		// Animation loop running every frame
+		function animateTimeline() {
+			// Smoothly move current towards target
+			if (Math.abs(currentProgress - targetProgress) > 0.001) {
+				currentProgress = lerp(currentProgress, targetProgress, 0.08);
+			} else {
+				currentProgress = targetProgress; // Snap to target when close enough
+			}
+			// Apply percentage directly to height
+			if (progressLine) {
+				progressLine.style.height = `${currentProgress * 100}%`;
+			}
+
+			// Check dot intersections
+			milestones.forEach((milestone) => {
+				const dot = milestone.querySelector('.timeline-dot');
+				const textLabels = milestone.querySelectorAll('.timeline-year'); // Gets both desktop and mobile headers
+				const dotRect = dot.getBoundingClientRect();
+				const triggerPoint = window.innerHeight * 0.53;
+
+				// If the dot crosses the middle of the screen
+				if (dotRect.top < triggerPoint) {
+					dot.classList.remove('bg-gray-600');
+					dot.classList.add('bg-accent', 'shadow-[0_0_10px_rgba(16,185,129,0.8)]');
+
+					textLabels.forEach(label => {
+						label.classList.remove('text-gray-500');
+						label.classList.add('gradient-text-reverse');
+					});
+				} else {
+					dot.classList.add('bg-gray-600');
+					dot.classList.remove('bg-accent', 'shadow-[0_0_10px_rgba(16,185,129,0.8)]');
+
+					textLabels.forEach(label => {
+						label.classList.add('text-gray-500');
+						label.classList.remove('gradient-text');
+					});
+				}
+			});
+
+			requestAnimationFrame(animateTimeline);
+		}
+
+		// Listen for scroll and resize
+		window.addEventListener('scroll', updateScroll);
+		window.addEventListener('resize', updateScroll);
+
+		// Initialize logic on page load
+		updateScroll();
+		animateTimeline();
+	</script>
 </body>
+
 </html>

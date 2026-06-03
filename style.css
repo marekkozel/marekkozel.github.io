@@ -1,0 +1,76 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Custom Gradient Text (Green to Blue) */
+.gradient-text {
+  background: linear-gradient(to right, #10b981, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.gradient-text-reverse {
+  background: linear-gradient(to right, #3b82f6, #10b981);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Solid Emerald Green */
+.text-emerald {
+  color: #10b981;
+}
+
+/* Solid Blue */
+.text-blue {
+  color: #3095d9;
+}
+
+/* IT-Themed Fixed Background */
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+}
+
+.grid-mask {
+  mask-image: radial-gradient(circle at center, black 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(circle at center, black 30%, transparent 100%);
+}
+
+/* Subtle Dot Pattern for sections */
+.bg-dots {
+  background-image: radial-gradient(rgba(59, 130, 246 0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Base style for the content sections with a faint emerald top-glow */
+.section-glow {
+  position: relative;
+  background-color: rgba(23, 23, 23, 0.85);
+  backdrop-filter: blur(2px);
+}
+
+.section-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(73, 235, 181, 0.15), transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section-content {
+  position: relative;
+  z-index: 10;
+}
