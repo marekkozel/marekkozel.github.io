@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Marek Kozel | Software Engineer & Developer</title>
 
-	<script src="https://cdn.tailwindcss.com"></script>
+	<script src="tailwind.js"></script>
 	<script>
 		tailwind.config = {
 			theme: {
@@ -38,6 +38,7 @@
 					<a href="#about" class="hover:text-blue-400 transition-colors">About</a>
 					<a href="#roadmap" class="hover:text-blue-400 transition-colors">Journey</a>
 					<a href="#projects" class="hover:text-blue-400 transition-colors">Projects</a>
+					<a href="personal.html" class="hover:text-blue-400 transition-colors">Personal</a>
 				</div>
 			</div>
 		</nav>
@@ -49,7 +50,7 @@
 			<div class="max-w-4xl mx-auto text-center relative">
 				<div data-aos="zoom-in" data-aos-duration="1000"
 					class="w-60 h-60 mx-auto mb-8 rounded-full bg-gray-800 p-1 bg-gradient-to-tr from-emerald-500 to-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.3)]">
-					<img src="images/profile_c.png" alt="Marek Kozel"
+					<img src="assets/images/profile_c.png" alt="Marek Kozel"
 						class="w-full h-full object-cover rounded-full border-4 border-dark">
 				</div>
 
@@ -75,7 +76,7 @@
 			</div>
 		</section>
 
-		<section id="about" class="py-24 px-6 border-y border-gray-800 section-glow bg-dots">
+		<section id="about" class="py-16 px-6 border-y border-gray-800 section-glow bg-dots">
 			<div class="max-w-4xl mx-auto section-content">
 				<h3 data-aos="fade-right" class="text-3xl font-bold mb-8 flex items-center text-emerald">
 					<span class="w-8 h-[2px] bg-gradient-to-r from-emerald-500 to-blue-500 mr-4"></span> About Me
@@ -94,13 +95,249 @@
 					</div>
 					<div data-aos="fade-left"
 						class="rounded-lg overflow-hidden bg-gray-800 aspect-video relative group border border-gray-700 shadow-[0_0_20px_rgba(73,235,181,0.2)] ">
-						<img src="images/coffee_nature.jpg" alt="Coffee and Nature" class="w-full h-full object-cover opacity-80">
+						<img src="assets/images/coffee_nature.jpg" alt="Coffee and Nature"
+							class="w-full h-full object-cover opacity-80">
 					</div>
 				</div>
 			</div>
 		</section>
 
-		<section id="roadmap" class="py-24 px-6 relative z-10">
+		<section id="experience" class="py-16 px-6 relative z-10">
+			<div class="max-w-7xl mx-auto">
+				<h3 data-aos="fade-up"
+					class="text-3xl font-bold text-blue mb-16 flex items-center justify-center w-fit mx-auto">
+					Work Experience
+				</h3>
+
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+					<!-- Card 1: 24 vision -->
+					<!-- ADDED data-href -->
+					<div
+						class="project-card card-wrapper group shadow-lg cursor-pointer hover:shadow-[0_0_30px_rgba(59,130,246,0.2)]"
+						data-aos="fade-up" data-aos-delay="100" data-href="https://24vs.io/">
+						<div class="card-inner">
+							<div class="h-48 relative overflow-hidden bg-gray-900 pointer-events-none">
+								<div class="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent z-10"></div>
+								<img src="assets/images/24vision.png" alt="24 vision"
+									class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+							</div>
+
+							<div class="p-6 flex-1 flex flex-col relative z-20 -mt-10 pointer-events-none">
+								<h3 class="text-2xl font-bold text-white mb-2 group-hover:text-accent transition-colors duration-300">24
+									vision</h3>
+								<h4 class="text-sm font-medium text-gray-500 mb-4">Software Engineer</h4>
+								<p class="text-sm text-gray-400 mb-6 flex-1 leading-relaxed">
+									Developed complex, AI-driven quality control solutions for the automotive industry. Focused on
+									detecting manufacturing errors and configuration issues on live assembly lines.
+								</p>
+
+								<div class="flex flex-wrap gap-2 mb-6">
+									<span
+										class="px-3 py-1 text-xs font-semibold bg-gray-800 text-gray-300 border border-gray-700 rounded-full">Python</span>
+									<span
+										class="px-3 py-1 text-xs font-semibold bg-gray-800 text-gray-300 border border-gray-700 rounded-full">C++</span>
+									<span
+										class="px-3 py-1 text-xs font-semibold bg-gray-800 text-gray-300 border border-gray-700 rounded-full">AI/ML</span>
+								</div>
+							</div>
+
+							<div class="p-6 pt-0 flex justify-between items-center relative z-20 pointer-events-none">
+								<p class="text-xs text-gray-500 font-medium">Automotive Tech</p>
+								<div
+									class="flex items-center gap-1 text-accent group-hover:text-blue-500 transition-colors text-sm font-bold">
+									<span>Read More</span>
+									<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em"
+										width="1em" xmlns="http://www.w3.org/2000/svg"
+										class="group-hover:translate-x-1 transition-transform">
+										<path
+											d="M429.6 92.1c4.9-11.9 2.1-25.6-7-34.7s-22.8-11.9-34.7-7l-352 144c-14.2 5.8-22.2 20.8-19.3 35.8s16.1 25.8 31.4 25.8l176 0 0 176c0 15.3 10.8 28.4 25.8 31.4s30-5.1 35.8-19.3l144-352z">
+										</path>
+									</svg>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Card 2: B2B IT -->
+					<!-- ADDED data-href -->
+					<div
+						class="project-card card-wrapper group shadow-lg cursor-pointer hover:shadow-[0_0_30px_rgba(59,130,246,0.2)]"
+						data-aos="fade-up" data-aos-delay="200" data-href="#contact">
+						<div class="card-inner">
+							<div class="h-48 relative overflow-hidden bg-gray-900 pointer-events-none">
+								<div class="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent z-10"></div>
+								<img src="assets/images/laptop.jpg" alt="B2B IT"
+									class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+							</div>
+							<div class="p-6 flex-1 flex flex-col relative z-20 -mt-10 pointer-events-none">
+								<h3 class="text-2xl font-bold text-white mb-2 group-hover:text-accent transition-colors duration-300">
+									B2B IT Contractor</h3>
+								<h4 class="text-sm font-medium text-gray-500 mb-4">Infrastructure & Automation</h4>
+								<p class="text-sm text-gray-400 mb-6 flex-1 leading-relaxed">
+									Architecting complex automation workflows, API data parsing, and managing self-hosted Linux
+									infrastructures for business clients.
+								</p>
+								<div class="flex flex-wrap gap-2 mb-6">
+									<span
+										class="px-3 py-1 text-xs font-semibold bg-gray-800 text-gray-300 border border-gray-700 rounded-full">n8n</span>
+									<span
+										class="px-3 py-1 text-xs font-semibold bg-gray-800 text-gray-300 border border-gray-700 rounded-full">Docker</span>
+									<span
+										class="px-3 py-1 text-xs font-semibold bg-gray-800 text-gray-300 border border-gray-700 rounded-full">Proxmox</span>
+								</div>
+							</div>
+							<div class="p-6 pt-0 flex justify-between items-center relative z-20 pointer-events-none">
+								<p class="text-xs text-gray-500 font-medium">Freelance / OSVČ</p>
+								<div
+									class="flex items-center gap-1 text-accent group-hover:text-blue-500 transition-colors text-sm font-bold">
+									<span>Read More</span>
+									<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em"
+										width="1em" xmlns="http://www.w3.org/2000/svg"
+										class="group-hover:translate-x-1 transition-transform">
+										<path
+											d="M429.6 92.1c4.9-11.9 2.1-25.6-7-34.7s-22.8-11.9-34.7-7l-352 144c-14.2 5.8-22.2 20.8-19.3 35.8s16.1 25.8 31.4 25.8l176 0 0 176c0 15.3 10.8 28.4 25.8 31.4s30-5.1 35.8-19.3l144-352z">
+										</path>
+									</svg>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Card 3: Rankacy -->
+					<!-- ADDED data-href -->
+					<div
+						class="project-card card-wrapper group shadow-lg cursor-pointer hover:shadow-[0_0_30px_rgba(59,130,246,0.2)]"
+						data-aos="fade-up" data-aos-delay="300" data-href="https://rankacy.com">
+						<div class="card-inner">
+							<div class="h-48 relative overflow-hidden bg-gray-900 pointer-events-none">
+								<div class="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent z-10"></div>
+								<img src="assets/images/rankacy.jpg" alt="Rankacy"
+									class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+							</div>
+							<div class="p-6 flex-1 flex flex-col relative z-20 -mt-10 pointer-events-none">
+								<h3 class="text-2xl font-bold text-white mb-2 group-hover:text-accent transition-colors duration-300">
+									Rankacy</h3>
+								<h4 class="text-sm font-medium text-gray-500 mb-4">Developer</h4>
+								<p class="text-sm text-gray-400 mb-6 flex-1 leading-relaxed">
+									Engineered a dedicated tool and platform for the Counter-Strike community, focusing on user
+									experience, mechanics, and backend performance.
+								</p>
+								<div class="flex flex-wrap gap-2 mb-6">
+									<span
+										class="px-3 py-1 text-xs font-semibold bg-gray-800 text-gray-300 border border-gray-700 rounded-full">C
+										/ C++</span>
+									<span
+										class="px-3 py-1 text-xs font-semibold bg-gray-800 text-gray-300 border border-gray-700 rounded-full">Game
+										Dev</span>
+									<span
+										class="px-3 py-1 text-xs font-semibold bg-gray-800 text-gray-300 border border-gray-700 rounded-full">CS
+										Tooling</span>
+								</div>
+							</div>
+							<div class="p-6 pt-0 flex justify-between items-center relative z-20 pointer-events-none">
+								<p class="text-xs text-gray-500 font-medium">Gaming</p>
+								<div
+									class="flex items-center gap-1 text-accent group-hover:text-blue-500 transition-colors text-sm font-bold">
+									<span>Read More</span>
+									<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em"
+										width="1em" xmlns="http://www.w3.org/2000/svg"
+										class="group-hover:translate-x-1 transition-transform">
+										<path
+											d="M429.6 92.1c4.9-11.9 2.1-25.6-7-34.7s-22.8-11.9-34.7-7l-352 144c-14.2 5.8-22.2 20.8-19.3 35.8s16.1 25.8 31.4 25.8l176 0 0 176c0 15.3 10.8 28.4 25.8 31.4s30-5.1 35.8-19.3l144-352z">
+										</path>
+									</svg>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+
+
+
+		<section id="projects" class="py-16 px-6 border-t border-gray-800 section-glow bg-dots">
+			<div class="max-w-6xl mx-auto section-content">
+				<h3 data-aos="fade-right" class="text-3xl font-bold mb-8 flex items-center text-emerald">
+					<span class="w-8 h-[2px] bg-gradient-to-r from-emerald-500 to-blue-500 mr-4"></span> Projects
+				</h3>
+
+				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+					<!-- Card 1 -->
+					<a href="https://github.com/marekkozel/Cubes-Battle" target="_blank" data-aos="fade-up" data-aos-delay="100"
+						class="block bg-dark p-6 rounded-lg border border-gray-800 transition-all duration-300 ease-out group relative overflow-hidden shadow-lg hover:-translate-y-2 hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(73,235,181,0.25)]">
+						<div class="w-full h-40 bg-gray-900 rounded-md mb-4 overflow-hidden relative">
+							<img src="assets/images/cubes_battle.png" alt="Cubes-Battle"
+								class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-80 group-hover:opacity-100">
+						</div>
+						<div class="flex justify-between items-start mb-2">
+							<h4 class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors duration-300">
+								Cubes-Battle</h4>
+							<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
+								class="text-gray-500 group-hover:text-emerald-400 group-hover:-translate-y-1 group-hover:translate-x-1 transition-all duration-300 mt-1"
+								height="1.2em" width="1.2em" xmlns="http://www.w3.org/2000/svg">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"></path>
+							</svg>
+						</div>
+						<p class="text-sm font-semibold gradient-text mb-4">C</p>
+						<p class="text-gray-400 text-sm">A game developed entirely from scratch using pure C, bypassing traditional
+							game engines.</p>
+					</a>
+
+					<!-- Card 2 -->
+					<a href="https://github.com/marekkozel/OpenGL_Render_engine" target="_blank" data-aos="fade-up"
+						data-aos-delay="200"
+						class="block bg-dark p-6 rounded-lg border border-gray-800 transition-all duration-300 ease-out group relative overflow-hidden shadow-lg hover:-translate-y-2 hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(73,235,181,0.25)]">
+						<div class="w-full h-40 bg-gray-900 rounded-md mb-4 overflow-hidden relative">
+							<img src="assets/images/opengl_engine.png" alt="OpenGL Render Engine"
+								class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-80 group-hover:opacity-100">
+						</div>
+						<div class="flex justify-between items-start mb-2">
+							<h4 class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors duration-300">
+								OpenGL Render Engine</h4>
+							<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
+								class="text-gray-500 group-hover:text-emerald-400 group-hover:-translate-y-1 group-hover:translate-x-1 transition-all duration-300 mt-1 shrink-0"
+								height="1.2em" width="1.2em" xmlns="http://www.w3.org/2000/svg">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"></path>
+							</svg>
+						</div>
+						<p class="text-sm font-semibold gradient-text mb-4">C++ / OpenGL</p>
+						<p class="text-gray-400 text-sm">A custom 3D rendering engine built from the ground up in C++ to master
+							graphics programming.</p>
+					</a>
+
+					<!-- Card 3 -->
+					<a href="https://github.com/marekkozel/Artificial_intelligence_courses" target="_blank" data-aos="fade-up"
+						data-aos-delay="300"
+						class="block bg-dark p-6 rounded-lg border border-gray-800 transition-all duration-300 ease-out group relative overflow-hidden shadow-lg hover:-translate-y-2 hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(73,235,181,0.25)]">
+						<div class="w-full h-40 bg-gray-900 rounded-md mb-4 overflow-hidden relative">
+							<img src="assets/images/pojspace_group.png" alt="AI Courses"
+								class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-80 group-hover:opacity-100">
+						</div>
+						<div class="flex justify-between items-start mb-2">
+							<h4 class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors duration-300">AI
+								Courses</h4>
+							<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
+								class="text-gray-500 group-hover:text-emerald-400 group-hover:-translate-y-1 group-hover:translate-x-1 transition-all duration-300 mt-1 shrink-0"
+								height="1.2em" width="1.2em" xmlns="http://www.w3.org/2000/svg">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"></path>
+							</svg>
+						</div>
+						<p class="text-sm font-semibold gradient-text mb-4">Curriculum Design</p>
+						<p class="text-gray-400 text-sm">Designed and developed artificial intelligence course materials
+							specifically tailored for high school students.</p>
+					</a>
+
+				</div>
+			</div>
+		</section>
+
+
+
+		<section id="roadmap" class="py-16 px-6 relative z-10">
 			<div class="max-w-5xl mx-auto">
 				<h3 data-aos="fade-up" class="text-3xl font-bold text-blue mb-16 flex items-center justify-center">
 					My Journey
@@ -208,68 +445,204 @@
 			</div>
 		</section>
 
-		<section id="projects" class="py-24 px-6 border-t border-gray-800 section-glow bg-dots">
+
+		<section id="contact" class="py-16 px-6 relative z-10 border-t border-gray-800 section-glow bg-dots">
 			<div class="max-w-6xl mx-auto section-content">
-				<h3 data-aos="fade-right" class="text-3xl font-bold mb-8 flex items-center text-emerald">
-					<span class="w-8 h-[2px] bg-gradient-to-r from-emerald-500 to-blue-500 mr-4"></span> Projects
+				<h3 data-aos="fade-up"
+					class="text-3xl font-bold text-emerald mb-16 flex items-center justify-center w-fit mx-auto">
+					Get In Touch
 				</h3>
 
-				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-					<div data-aos="fade-up" data-aos-delay="100"
-						class="bg-dark p-6 rounded-lg border border-gray-800 hover:border-blue-500 transition-colors duration-300 group relative overflow-hidden shadow-lg hover:shadow-blue-500/10">
-						<div class="w-full h-40 bg-gray-900 rounded-md mb-4 overflow-hidden relative">
-							<img src="images/cubes_battle.png"
-								class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100">
+				<div class="grid md:grid-cols-2 gap-12 lg:gap-20">
+
+					<div data-aos="fade-right" class="flex flex-col justify-center">
+						<h4 class="text-2xl font-bold text-white mb-6">Let's build something together.</h4>
+						<p class="text-gray-400 leading-relaxed mb-8">
+							Whether you have a question about my projects, want to discuss a B2B automation opportunity, or just want
+							to say hi, feel free to drop a message. I'll try my best to get back to you!
+						</p>
+
+
+
+						<div class="space-y-4 mb-10">
+							<!-- Email -->
+							<div class="flex items-center gap-4 text-gray-300">
+								<div
+									class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center border border-gray-700 text-accent shrink-0">
+									<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1.2em"
+										width="1.2em" xmlns="http://www.w3.org/2000/svg">
+										<path
+											d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z">
+										</path>
+									</svg>
+								</div>
+								<button onclick="copyContact('marek.kozel.work@gmail.com', this)"
+									class="group flex items-center hover:text-blue-400 transition-colors text-left">
+									<span>marek.kozel.work@gmail.com</span>
+									<span
+										class="ml-3 text-xs text-accent opacity-0 group-hover:opacity-100 transition-opacity copy-feedback">Copy</span>
+								</button>
+							</div>
+
+							<!-- Phone -->
+							<div class="flex items-center gap-4 text-gray-300">
+								<div
+									class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center border border-gray-700 text-blue-400 shrink-0">
+									<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1.2em"
+										width="1.2em" xmlns="http://www.w3.org/2000/svg">
+										<path
+											d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z">
+										</path>
+									</svg>
+								</div>
+								<!-- Update with your actual phone number in the onclick string -->
+								<button onclick="copyContact('+420 776 051 397', this)"
+									class="group flex items-center hover:text-accent transition-colors text-left">
+									<span>+420 776 051 397</span>
+									<span
+										class="ml-3 text-xs text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity copy-feedback">Copy</span>
+								</button>
+							</div>
+
+							<!-- Location -->
+							<div class="flex items-center gap-4 text-gray-300">
+								<div
+									class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center border border-gray-700 text-accent shrink-0">
+									<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 384 512" height="1.2em"
+										width="1.2em" xmlns="http://www.w3.org/2000/svg">
+										<path
+											d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z">
+										</path>
+									</svg>
+								</div>
+								<span>Frýdek-Místek, Czech Republic</span>
+							</div>
 						</div>
-						<h4 class="text-xl font-bold text-white mb-2">Cubes-Battle</h4>
-						<p class="text-sm font-semibold gradient-text mb-4">C</p>
-						<p class="text-gray-400 text-sm">A game developed entirely from scratch using pure C, bypassing
-							traditional game engines.</p>
+
+						<div>
+							<a href="assets/Marek_Kozel_CV.pdf" download="Marek_Kozel_CV.pdf"
+								class="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-accent to-blue-500 text-white font-semibold rounded-md hover:opacity-90 transition-all shadow-[0_0_20px_rgba(59,130,246,0.3)] hover:-translate-y-1">
+								<span>Download CV</span>
+								<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1.2em"
+									width="1.2em" xmlns="http://www.w3.org/2000/svg">
+									<path
+										d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z">
+									</path>
+								</svg>
+							</a>
+						</div>
 					</div>
 
-					<div data-aos="fade-up" data-aos-delay="200"
-						class="bg-dark p-6 rounded-lg border border-gray-800 hover:border-blue-500 transition-colors duration-300 group relative overflow-hidden shadow-lg hover:shadow-blue-500/10">
-						<div class="w-full h-40 bg-gray-900 rounded-md mb-4 overflow-hidden relative">
-							<img src="images/opengl_engine.png"
-								class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100">
+					<div data-aos="fade-left"
+						class="bg-card border border-gray-800 p-8 rounded-2xl shadow-lg relative overflow-hidden group">
+						<div
+							class="absolute inset-0 bg-gradient-to-br from-accent/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
 						</div>
-						<h4 class="text-xl font-bold text-white mb-2">OpenGL Render Engine</h4>
-						<p class="text-sm font-semibold gradient-text mb-4">C++ / OpenGL</p>
-						<p class="text-gray-400 text-sm">A custom 3D rendering engine built from the ground up in C++ to master
-							graphics programming.</p>
+
+						<form action="https://formspree.io/f/xaqzyzog" method="POST" class="relative z-10 flex flex-col gap-6">
+
+							<div class="flex flex-col gap-2">
+								<label for="name" class="text-sm font-semibold text-gray-300">Name</label>
+								<input type="text" id="name" name="name" required placeholder="John Doe"
+									class="w-full bg-dark border border-gray-700 rounded-md p-3 text-white placeholder-gray-600 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all">
+							</div>
+
+							<div class="flex flex-col gap-2">
+								<label for="email" class="text-sm font-semibold text-gray-300">Email</label>
+								<input type="email" id="email" name="email" required placeholder="john@example.com"
+									class="w-full bg-dark border border-gray-700 rounded-md p-3 text-white placeholder-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all">
+							</div>
+
+							<div class="flex flex-col gap-2">
+								<label for="message" class="text-sm font-semibold text-gray-300">Message</label>
+								<textarea id="message" name="message" rows="4" required placeholder="How can I help you?"
+									class="w-full bg-dark border border-gray-700 rounded-md p-3 text-white placeholder-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all resize-none"></textarea>
+							</div>
+
+							<button type="submit"
+								class="w-full py-3 bg-gray-800 text-white font-semibold rounded-md border border-gray-700 hover:bg-gray-700 hover:border-blue-500 transition-all mt-2 flex justify-center items-center gap-2 group/btn">
+								<span>Send Message</span>
+								<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em"
+									width="1em" xmlns="http://www.w3.org/2000/svg"
+									class="group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform text-blue-500">
+									<path
+										d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480V396.4c0-4 1.5-7.8 4.2-10.7L331.8 202.8c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8 17.7 316.6C7.1 311.3 .3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z">
+									</path>
+								</svg>
+							</button>
+						</form>
 					</div>
 
-					<div data-aos="fade-up" data-aos-delay="300"
-						class="bg-dark p-6 rounded-lg border border-gray-800 hover:border-blue-500 transition-colors duration-300 group relative overflow-hidden shadow-lg hover:shadow-blue-500/10">
-						<div class="w-full h-40 bg-gray-900 rounded-md mb-4 overflow-hidden relative">
-							<img src="images/pojspace_group.png"
-								class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100">
-						</div>
-						<h4 class="text-xl font-bold text-white mb-2">AI Courses</h4>
-						<p class="text-sm font-semibold gradient-text mb-4">Curriculum Design</p>
-						<p class="text-gray-400 text-sm">Designed and developed artificial intelligence course materials
-							specifically tailored for high school students.</p>
-					</div>
 				</div>
 			</div>
 		</section>
 
 		<footer class="bg-dark py-12 border-t border-gray-800 text-center">
-			<div class="max-w-4xl mx-auto px-6">
-				<h2 class="text-2xl font-bold gradient-text mb-6">Let's Connect</h2>
-				<div class="flex justify-center gap-6 mb-8">
-					<a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">GitHub</a>
-					<a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">LinkedIn</a>
-					<a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">YouTube (Fishing)</a>
-					<a href="mailto:your.email@example.com" class="text-gray-400 hover:text-blue-400 transition-colors">Email</a>
-				</div>
-				<p class="text-gray-600 text-sm">
-					&copy;
-					<script>document.write(new Date().getFullYear())</script> Marek Kozel.
-				</p>
+			<div class="flex justify-center items-center gap-6 mb-8">
+				<a href="https://github.com/marekkozel" target="_blank"
+					class="text-gray-400 hover:text-blue-400 transition-colors">GitHub</a>
+				<a href="https://www.linkedin.com/in/marek-kozel-82a125327/" target="_blank"
+					class="text-gray-400 hover:text-blue-400 transition-colors">LinkedIn</a>
+				<a href="https://www.youtube.com/@majko612" target="_blank"
+					class="text-gray-400 hover:text-blue-400 transition-colors">YouTube</a>
+
+				<!-- Smooth Cross-Fade Copy Button -->
+				<button onclick="copyFooterEmail('marek.kozel.work@gmail.com', this)"
+					class="relative text-gray-400 hover:text-blue-400 transition-colors flex justify-center w-12">
+					<span class="default-text transition-opacity duration-300 opacity-100">Email</span>
+					<span
+						class="copied-text absolute inset-0 text-accent font-semibold transition-opacity duration-300 opacity-0 pointer-events-none">Copied!</span>
+				</button>
+			</div>
+			<p class="text-gray-600 text-sm">
+				&copy;
+				<script>document.write(new Date().getFullYear())</script> Marek Kozel.
+			</p>
 			</div>
 		</footer>
 	</main>
+
+	<script>
+		function copyFooterEmail(text, btn) {
+			navigator.clipboard.writeText(text).then(() => {
+				const defaultText = btn.querySelector('.default-text');
+				const copiedText = btn.querySelector('.copied-text');
+
+				// Cross-fade to "Copied!"
+				defaultText.classList.replace('opacity-100', 'opacity-0');
+				copiedText.classList.replace('opacity-0', 'opacity-100');
+
+				// Revert back to "Email" after 2 seconds
+				setTimeout(() => {
+					defaultText.classList.replace('opacity-0', 'opacity-100');
+					copiedText.classList.replace('opacity-100', 'opacity-0');
+				}, 2000);
+			}).catch(err => {
+				console.error('Failed to copy text: ', err);
+			});
+		}
+	</script>
+
+	<script>
+		// Copy contact info to clipboard
+		function copyContact(text, buttonElement) {
+			navigator.clipboard.writeText(text).then(() => {
+				const feedbackElement = buttonElement.querySelector('.copy-feedback');
+
+				// Show feedback
+				feedbackElement.innerText = 'Copied!';
+				feedbackElement.classList.add('text-white');
+
+				// Reset feedback after 2 seconds
+				setTimeout(() => {
+					feedbackElement.innerText = 'Copy';
+					feedbackElement.classList.remove('text-white');
+				}, 2000);
+			}).catch(err => {
+				console.error('Failed to copy text: ', err);
+			});
+		}
+	</script>
 
 	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 	<script>
@@ -293,7 +666,7 @@
 		function updateScroll() {
 			if (!container) return;
 			const rect = container.getBoundingClientRect();
-			const triggerPoint = window.innerHeight * 0.5; // Trigger at exactly 50% screen height
+			const triggerPoint = window.innerHeight * 0.58; // Trigger at exactly 50% screen height
 
 			// Distance scrolled past the trigger point
 			const scrollDistance = triggerPoint - rect.top;
@@ -321,7 +694,7 @@
 				const dot = milestone.querySelector('.timeline-dot');
 				const textLabels = milestone.querySelectorAll('.timeline-year'); // Gets both desktop and mobile headers
 				const dotRect = dot.getBoundingClientRect();
-				const triggerPoint = window.innerHeight * 0.53;
+				const triggerPoint = window.innerHeight * 0.58;
 
 				// If the dot crosses the middle of the screen
 				if (dotRect.top < triggerPoint) {
@@ -338,7 +711,7 @@
 
 					textLabels.forEach(label => {
 						label.classList.add('text-gray-500');
-						label.classList.remove('gradient-text');
+						label.classList.remove('gradient-text-reverse');
 					});
 				}
 			});
@@ -353,6 +726,62 @@
 		// Initialize logic on page load
 		updateScroll();
 		animateTimeline();
+	</script>
+	<script>
+		// --- 3D TILT & FLASH EFFECT FOR CARDS ---
+		const cards = document.querySelectorAll('.project-card');
+
+		cards.forEach(card => {
+			// 1. 3D Tilt Effect on Mouse Move
+			card.addEventListener('mousemove', (e) => {
+				const rect = card.getBoundingClientRect();
+				const x = e.clientX - rect.left;
+				const y = e.clientY - rect.top;
+
+				const centerX = rect.width / 2;
+				const centerY = rect.height / 2;
+
+				const rotateX = ((y - centerY) / centerY) * -10;
+				const rotateY = ((x - centerX) / centerX) * 10;
+
+				card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+				card.style.transition = 'none';
+			});
+
+			// Reset the card smoothly when mouse leaves
+			card.addEventListener('mouseleave', () => {
+				card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+				card.style.transition = 'transform 0.4s ease, box-shadow 0.4s ease';
+			});
+
+			// 2. White Light Flash & Delayed Navigation on Click
+			card.addEventListener('click', (e) => {
+				const rect = card.getBoundingClientRect();
+				const x = e.clientX - rect.left;
+				const y = e.clientY - rect.top;
+
+				const flash = document.createElement('span');
+				flash.classList.add('flash-element');
+
+				flash.style.left = `${x}px`;
+				flash.style.top = `${y}px`;
+				flash.style.width = `${rect.width}px`;
+				flash.style.height = `${rect.width}px`;
+
+				const innerCard = card.querySelector('.card-inner');
+				innerCard.appendChild(flash);
+
+				const targetUrl = card.getAttribute('data-href');
+
+				// Delay navigation to let the animation play
+				setTimeout(() => {
+					flash.remove();
+					if (targetUrl && targetUrl !== "") {
+						window.open(targetUrl, '_blank'); // Opens in a new tab
+					}
+				}, 400); // 400ms is enough to see the flash before the tab switches
+			});
+		});
 	</script>
 </body>
 

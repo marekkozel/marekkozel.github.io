@@ -74,3 +74,82 @@ body {
   position: relative;
   z-index: 10;
 }
+
+
+/* --- MAGIC SPINNING BORDER --- */
+.card-wrapper {
+  position: relative;
+  padding: 2px;
+  /* This is the thickness of the spinning border */
+  border-radius: 1rem;
+  overflow: hidden;
+  /* Sets up smooth resetting for the 3D tilt */
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* The spinning gradient element */
+.card-wrapper::before {
+  content: '';
+  position: absolute;
+  /* Make it large enough to cover the corners while spinning */
+  top: -100%;
+  left: -100%;
+  right: -100%;
+  bottom: -100%;
+  background: conic-gradient(from 90deg at 50% 50%, transparent 0%, #10b981 40%, #3b82f6 60%, transparent 80%);
+  animation: border-spin 3s linear infinite;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 0;
+}
+
+.card-wrapper:hover::before {
+  opacity: 1;
+  /* Fade the spinning border in on hover */
+}
+
+/* The actual card background sitting on top of the spinner */
+.card-inner {
+  position: relative;
+  z-index: 10;
+  background-color: #171717;
+  /* matches your bg-card color */
+  border-radius: 0.9rem;
+  /* Slightly smaller than outer wrapper to show border */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+@keyframes border-spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* --- CLICK FLASH EFFECT --- */
+.flash-element {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.8);
+  transform: translate(-50%, -50%) scale(0);
+  animation: flash-ripple 0.6s ease-out forwards;
+  pointer-events: none;
+  /* So it doesn't block other clicks */
+  z-index: 50;
+  /* Optional glow on the flash */
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes flash-ripple {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(5);
+    opacity: 0;
+  }
+}

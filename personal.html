@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marek Kozel | Personal & Projects</title>
+
+
+
+  <!-- Tailwind CSS -->
+  <script src="tailwind.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            dark: '#0a0a0a',
+            card: '#171717',
+            accent: '#10b981',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- AOS Animation CSS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-dark text-gray-200 antialiased selection:bg-accent selection:text-dark relative overflow-x-hidden">
+
+  <!-- Fixed IT Background Pattern -->
+  <div class="fixed inset-0 z-0 pointer-events-none bg-grid-pattern grid-mask"></div>
+
+  <main class="relative z-10">
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-dark/80 backdrop-blur-md border-b border-gray-800" data-aos="fade-down"
+      data-aos-duration="800">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="index.html" class="text-xl font-bold tracking-tighter text-white">MK<span
+            class="text-accent">.</span></a>
+        <div class="space-x-6 text-sm font-medium flex items-center">
+          <!-- Link back to main portfolio -->
+          <a href="index.html" class="flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
+            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1.2em"
+              width="1.2em" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M217.9 256L345 129c9.4-9.4 9.4-24.6 0-33.9-9.4-9.4-24.6-9.4-33.9 0L167 239c-9.1 9.1-9.3 23.7-.7 33.1L310.9 417c4.7 4.7 10.9 7 17 7s12.3-2.3 17-7c9.4-9.4 9.4-24.6 0-33.9L217.9 256z">
+              </path>
+            </svg>
+            Back to Portfolio
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Header Section -->
+    <section class="pt-48 pb-20 px-6 relative">
+      <div class="max-w-6xl mx-auto text-center relative z-10">
+        <h1 data-aos="fade-up" class="text-5xl md:text-7xl font-bold text-white mb-8 tracking-tight">
+          Beyond the <span class="gradient-text">Code</span>
+        </h1>
+        <p data-aos="fade-up" data-aos-delay="100" class="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+          A collection of my music compositions, method feeder fishing content, and indie game development.
+        </p>
+      </div>
+    </section>
+
+    <!-- Travel Blog Redirect Banner -->
+    <section class="py-12 px-6 mb-12" data-aos="fade-up" data-aos-delay="200">
+      <div class="max-w-6xl mx-auto">
+        <div
+          class="relative rounded-3xl overflow-hidden shadow-[0_0_30px_rgba(16,185,129,0.15)] group block border border-gray-700">
+          <!-- Background Image (Replace with a photo of Matylda or Georgia) -->
+          <div class="absolute inset-0">
+            <img src="assets/images/georgia.jpg" alt="Expedition Georgia"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 opacity-40">
+            <div class="absolute inset-0 bg-gradient-to-r from-dark via-dark/90 to-transparent"></div>
+          </div>
+
+          <div class="relative z-10 p-12 md:p-16 flex flex-col md:flex-row items-center justify-between gap-10">
+            <div>
+              <h3 class="text-4xl font-bold text-white mb-4">Expedition Georgia</h3>
+              <p class="text-lg text-gray-300 max-w-2xl leading-relaxed">
+                Read the travel blog documenting our 11,000 km journey across borders in a mechanically modified Octavia
+                1 named "Matylda".
+              </p>
+            </div>
+            <!-- Replace href with your actual blog URL -->
+            <a href="https://travell-blog.k0zel.com/en/" target="_blank"
+              class="shrink-0 px-10 py-4 bg-gradient-to-r from-accent to-blue-500 text-white font-bold rounded-lg hover:opacity-90 transition-all shadow-lg flex items-center gap-3">
+              <span>Read the Blog</span>
+              <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
+                stroke-linejoin="round" height="1.2em" width="1.2em" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Music Section -->
+    <section class="py-16 px-6 section-glow bg-dots border-t border-gray-800">
+      <div class="max-w-6xl mx-auto section-content">
+        <h3 data-aos="fade-right" class="text-4xl font-bold gradient-text mb-6 flex items-center w-fit">
+          Music Production
+        </h3>
+        <p data-aos="fade-right" class="text-lg text-gray-400 mb-16 max-w-2xl leading-relaxed">
+          Original tracks and audio compositions produced in FL Studio.
+        </p>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+
+          <!-- AUDIO BLOCK 2 -->
+          <div data-aos="fade-up" data-aos-delay="100"
+            class="bg-card border border-gray-800 p-8 rounded-2xl shadow-lg hover:border-accent transition-colors">
+            <div class="flex justify-between items-start mb-8">
+              <div>
+                <h4 class="text-2xl font-bold text-white mb-2">Goofy office music for Game Jam</h4>
+                <p class="text-sm font-medium text-gray-500">Background</p>
+              </div>
+              <div class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center border border-gray-700">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
+                  class="text-accent text-xl" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M470.38 1.51L150.41 96A32 32 0 0 0 128 126.51v261.41A139 139 0 0 0 96 384c-53 0-96 28.66-96 64s43 64 96 64 96-28.66 96-64V214.32l256-75v184.61a138.4 138.4 0 0 0-32-3.93c-53 0-96 28.66-96 64s43 64 96 64 96-28.65 96-64V32a32 32 0 0 0-41.62-30.49z">
+                  </path>
+                </svg>
+              </div>
+            </div>
+            <audio controls class="w-full h-12 outline-none rounded-full bg-gray-900">
+              <source src="assets/music/Goofy_beat.mp3" type="audio/mpeg">
+            </audio>
+          </div>
+
+          <!-- AUDIO BLOCK 1 -->
+          <div data-aos="fade-up"
+            class="bg-card border border-gray-800 p-8 rounded-2xl shadow-lg hover:border-accent transition-colors">
+            <div class="flex justify-between items-start mb-8">
+              <div>
+                <h4 class="text-2xl font-bold text-white mb-2">Campfire experimental music</h4>
+                <p class="text-sm font-medium text-gray-500">Ambient</p>
+              </div>
+              <div class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center border border-gray-700">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
+                  class="text-accent text-xl" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M470.38 1.51L150.41 96A32 32 0 0 0 128 126.51v261.41A139 139 0 0 0 96 384c-53 0-96 28.66-96 64s43 64 96 64 96-28.66 96-64V214.32l256-75v184.61a138.4 138.4 0 0 0-32-3.93c-53 0-96 28.66-96 64s43 64 96 64 96-28.65 96-64V32a32 32 0 0 0-41.62-30.49z">
+                  </path>
+                </svg>
+              </div>
+            </div>
+            <audio controls class="w-full h-12 outline-none rounded-full bg-gray-900">
+              <source src="assets/music/Campfire_test.wav" type="audio/wav">
+            </audio>
+          </div>
+
+
+
+        </div>
+      </div>
+    </section>
+
+    <!-- YouTube Videos Section -->
+    <section class="py-16 px-6 border-t border-gray-800">
+      <div class="max-w-6xl mx-auto">
+        <h3 data-aos="fade-right" class="text-4xl font-bold gradient-text mb-6 flex items-center w-fit">
+          Fishing & Video Content
+        </h3>
+        <p data-aos="fade-right" class="text-lg text-gray-400 mb-16 max-w-2xl leading-relaxed">
+          Strategies, tournaments, and sessions centered around method feeder fishing.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-12">
+
+          <!-- YOUTUBE BLOCK 1 -->
+          <div data-aos="fade-up" class="bg-card border border-gray-800 rounded-2xl overflow-hidden shadow-xl p-3">
+            <div class="aspect-video w-full rounded-xl overflow-hidden bg-gray-900">
+              <!-- Example placeholder iframe -->
+              <iframe class="w-full h-full" src="https://www.youtube.com/embed/f5wqC5HZhCc?si=-uzUWWWOTQT3Othd"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+            </div>
+            <div class="p-6 pb-4">
+              <h4 class="text-xl font-bold text-white mb-2">Fishing on big carp lake Koblov</h4>
+              <p class="text-base text-gray-500">Experience and techniques for targeting large carp in this popular
+                destination.</p>
+            </div>
+          </div>
+
+          <!-- YOUTUBE BLOCK 2 -->
+          <div data-aos="fade-up" data-aos-delay="100"
+            class="bg-card border border-gray-800 rounded-2xl overflow-hidden shadow-xl p-3">
+            <div class="aspect-video w-full rounded-xl overflow-hidden bg-gray-900">
+              <iframe class="w-full h-full" src="https://www.youtube.com/embed/HJXsK8di4SQ?si=9zK4YWHpWphVi65f"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+            </div>
+            <div class="p-6 pb-4">
+              <h4 class="text-xl font-bold text-white mb-2">Talián Reservoir Session</h4>
+              <p class="text-base text-gray-500">Spring fishing walkthrough and setup.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Games Showcase Section -->
+    <section class="py-16 px-6 section-glow bg-dots border-t border-gray-800">
+      <div class="max-w-6xl mx-auto section-content">
+        <h3 data-aos="fade-right" class="text-4xl font-bold gradient-text mb-16 flex items-center w-fit">
+          Indie Games
+        </h3>
+
+        <!-- Game Card -->
+        <div data-aos="fade-up"
+          class="bg-card border border-gray-800 rounded-3xl overflow-hidden shadow-xl flex flex-col md:flex-row group hover:border-blue-500 transition-colors">
+
+
+          <div class="md:w-1/2 h-72 md:h-auto relative overflow-hidden bg-gray-900">
+            <video autoplay loop muted playsinline
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 pointer-events-none">
+              <source src="assets/videos/cubes_battle.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+
+          <!-- Game Details & Links -->
+          <div class="md:w-1/2 p-10 md:p-16 flex flex-col justify-center">
+            <h4 class="text-4xl font-bold text-white mb-4">Cubes-Battle</h4>
+            <span
+              class="inline-block px-4 py-1.5 bg-gray-800 text-accent border border-gray-700 rounded-full text-sm font-semibold w-fit mb-8">Built
+              in Pure C</span>
+
+            <p class="text-lg text-gray-400 mb-10 leading-relaxed">
+              A custom-built game developed entirely from scratch without the use of a traditional game engine. This
+              project focuses heavily on low-level performance, memory management, and pure C programming mechanics.
+            </p>
+
+            <div class="flex flex-wrap gap-6">
+              <a href="https://github.com/marekkozel/Cubes-Battle/archive/refs/heads/main.zip" target="_blank"
+                class="px-8 py-3 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-500 transition-all shadow-lg flex items-center gap-3">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1.4em"
+                  width="1.4em" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z">
+                  </path>
+                </svg>
+                Download Build
+              </a>
+              <a href="https://github.com/marekkozel/Cubes-Battle" target="_blank"
+                class="px-8 py-3 bg-gray-800 text-white font-bold rounded-lg border border-gray-700 hover:border-gray-500 transition-all flex items-center gap-3">
+                Source Code
+              </a>
+            </div>
+          </div>
+        </div>
+        <div data-aos="fade-up"
+          class="mt-16 bg-card border border-gray-800 rounded-3xl overflow-hidden shadow-xl flex flex-col md:flex-row group hover:border-emerald-500 transition-colors">
+
+          <!-- Game Cover Image -->
+          <div class="md:w-1/2 h-72 md:h-auto relative overflow-hidden bg-gray-900">
+            <img src="assets/images/key_finder.png" alt="KeyFinder"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+          </div>
+
+          <!-- Game Details & Links -->
+          <div class="md:w-1/2 p-10 md:p-16 flex flex-col justify-center">
+            <h4 class="text-4xl font-bold text-white mb-4">KeyFinder</h4>
+            <span
+              class="inline-block px-4 py-1.5 bg-gray-800 text-blue-400 border border-gray-700 rounded-full text-sm font-semibold w-fit mb-8">Game
+              Jam Entry</span>
+
+            <p class="text-lg text-gray-400 mb-10 leading-relaxed">
+              You play as a character who lost his keyboard and now needs to pick up lost keys to get to the end. You
+              can
+              dynamically assign your keys in the TAB menu by simply dragging and dropping them. Originally created for
+              the Shawcats Game Jam!
+            </p>
+
+            <div class="flex flex-wrap gap-6">
+              <!-- Itch.io Link -->
+              <a href="https://majko612.itch.io/keyfinder2" target="_blank"
+                class="px-8 py-3 bg-accent text-dark font-bold rounded-lg hover:bg-emerald-400 transition-all shadow-lg flex items-center gap-3">
+                <svg stroke="currentColor" fill="none" stroke-width="3" viewBox="0 0 24 24" stroke-linecap="round"
+                  stroke-linejoin="round" height="1.4em" width="1.4em" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="6" x2="10" y1="11" y2="11"></line>
+                  <line x1="8" x2="8" y1="9" y2="13"></line>
+
+                  <line x1="15" x2="15.01" y1="12" y2="12"></line>
+                  <line x1="18" x2="18.01" y1="10" y2="10"></line>
+
+                  <path
+                    d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z">
+                  </path>
+                </svg>
+                Play on Itch.io
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark py-12 border-t border-gray-800 text-center">
+      <div class="max-w-4xl mx-auto px-6 text-gray-500 text-sm">
+        &copy;
+        <script>document.write(new Date().getFullYear())</script> Marek Kozel.
+      </div>
+    </footer>
+  </main>
+
+  <!-- AOS Script Initialization -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ once: true, offset: 50, duration: 800 });
+  </script>
+
+</body>
+
+</html>
