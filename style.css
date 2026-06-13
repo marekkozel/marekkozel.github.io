@@ -142,6 +142,8 @@ body {
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
 }
 
+
+
 @keyframes flash-ripple {
   0% {
     transform: translate(-50%, -50%) scale(0);
@@ -151,5 +153,170 @@ body {
   100% {
     transform: translate(-50%, -50%) scale(5);
     opacity: 0;
+  }
+}
+
+/* --- 3D UNIFORM SYSTEM CAROUSEL --- */
+.book-container {
+  perspective: 2500px;
+  padding: 4rem 0;
+}
+
+.book-wrapper {
+  transform-style: preserve-3d;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 440px;
+  width: 100%;
+}
+
+/* Base style for individual items */
+.book-page {
+  position: absolute;
+  transform-style: preserve-3d;
+  /* Fast, linear-precision transition curve for frictionless lateral scanning */
+  transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+/* * Balanced Distribution Matrix
+ * Uniform -45deg baseline angle with standard 260px spacing gaps
+ */
+.page-1 {
+  transform: translateX(-520px) translateZ(-80px) rotateY(-45deg);
+  z-index: 10;
+}
+
+.page-2 {
+  transform: translateX(-260px) translateZ(-40px) rotateY(-45deg);
+  z-index: 11;
+}
+
+.page-3 {
+  transform: translateX(0px) translateZ(0px) rotateY(-45deg);
+  z-index: 12;
+}
+
+.page-4 {
+  transform: translateX(260px) translateZ(40px) rotateY(-45deg);
+  z-index: 13;
+}
+
+.page-5 {
+  transform: translateX(520px) translateZ(80px) rotateY(-45deg);
+  z-index: 14;
+}
+
+/* * Static System Pull-Out Vector
+ * Every card travels forward to translateZ(140px) and moves to an identical -15deg pitch.
+ * No clipping, no asymmetrical jumping, completely universal behavior.
+ */
+.page-1:hover {
+  transform: translateX(-520px) translateZ(140px) rotateY(-15deg);
+  z-index: 50;
+}
+
+.page-2:hover {
+  transform: translateX(-260px) translateZ(140px) rotateY(-15deg);
+  z-index: 50;
+}
+
+.page-3:hover {
+  transform: translateX(0px) translateZ(140px) rotateY(-15deg);
+  z-index: 50;
+}
+
+.page-4:hover {
+  transform: translateX(260px) translateZ(140px) rotateY(-15deg);
+  z-index: 50;
+}
+
+.page-5:hover {
+  transform: translateX(520px) translateZ(140px) rotateY(-15deg);
+  z-index: 50;
+}
+
+/* Sleek drop-shadow boost on highlight */
+.book-page:hover img {
+  box-shadow: -20px 25px 50px rgba(0, 0, 0, 0.65), 0 0 30px rgba(16, 185, 129, 0.1);
+}
+
+/* System Scaling Rules for Mid-Tier Viewports */
+@media (max-w: 1200px) {
+  .book-wrapper {
+    height: 340px;
+  }
+
+  .page-1 {
+    transform: translateX(-380px) translateZ(-60px) rotateY(-40deg);
+  }
+
+  .page-2 {
+    transform: translateX(-190px) translateZ(-30px) rotateY(-40deg);
+  }
+
+  .page-3 {
+    transform: translateX(0px) translateZ(0px) rotateY(-40deg);
+  }
+
+  .page-4 {
+    transform: translateX(190px) translateZ(30px) rotateY(-40deg);
+  }
+
+  .page-1:hover {
+    transform: translateX(-380px) translateZ(100px) rotateY(-10deg);
+  }
+
+  .page-2:hover {
+    transform: translateX(-190px) translateZ(100px) rotateY(-10deg);
+  }
+
+  .page-3:hover {
+    transform: translateX(0px) translateZ(100px) rotateY(-10deg);
+  }
+
+  .page-4:hover {
+    transform: translateX(190px) translateZ(100px) rotateY(-10deg);
+  }
+}
+
+/* System Scaling Rules for Mobile Components */
+@media (max-w: 768px) {
+  .book-wrapper {
+    height: 260px;
+  }
+
+  .page-1 {
+    transform: translateX(-180px) translateZ(-40px) rotateY(-35deg);
+  }
+
+  .page-2 {
+    transform: translateX(-90px) translateZ(-20px) rotateY(-35deg);
+  }
+
+  .page-3 {
+    transform: translateX(0px) translateZ(0px) rotateY(-35deg);
+  }
+
+  .page-4 {
+    transform: translateX(90px) translateZ(20px) rotateY(-35deg);
+  }
+
+  .page-1:hover {
+    transform: translateX(-180px) translateZ(80px) rotateY(-5deg);
+  }
+
+  .page-2:hover {
+    transform: translateX(-90px) translateZ(80px) rotateY(-5deg);
+  }
+
+  .page-3:hover {
+    transform: translateX(0px) translateZ(80px) rotateY(-5deg);
+  }
+
+  .page-4:hover {
+    transform: translateX(90px) translateZ(80px) rotateY(-5deg);
   }
 }
